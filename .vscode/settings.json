@@ -1,0 +1,26 @@
+{
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true
+  },
+  "search.exclude": {
+    "**/node_modules": true
+  },
+  "conventionalCommits.scopes": [
+    // Dependencies
+    "deps",
+    "dev-deps",
+    "peer-deps",
+
+    // Gelato API Scopes
+    "orders",
+    "products",
+    "shipment"
+  ],
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  }
+}
