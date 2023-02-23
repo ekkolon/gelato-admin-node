@@ -16,7 +16,9 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@gelato/apis/orders": ["packages/apis/orders/src/index.ts"],
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
