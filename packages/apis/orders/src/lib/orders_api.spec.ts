@@ -1,4 +1,4 @@
-import { orders } from './orders';
+import { orders } from './orders_api';
 
 describe('orders', () => {
   it('should work', () => {

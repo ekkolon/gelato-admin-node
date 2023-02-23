@@ -15,4 +15,5 @@
  * limitations under the License.
  */
 
-export * from './lib/orders';
+export * from './lib/order';
+export * from './lib/orders_api';
