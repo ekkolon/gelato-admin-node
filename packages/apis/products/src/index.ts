@@ -15,4 +15,8 @@
  * limitations under the License.
  */
 
-export * from './lib/products';
+export * from './lib/catalog';
+export * from './lib/cover-dimensions';
+export * from './lib/prices';
+export * from './lib/product';
+export * from './lib/stock-availability';
