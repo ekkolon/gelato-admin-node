@@ -24,7 +24,7 @@ See [Gelato API Docs](https://dashboard.gelato.com/docs/) for more details.
 - [ ] Create and provide ability to initialize `GelatoClient` with options.
   - [ ] Get `apiKey` option from env variable
   - [ ] Provide `apiKey` in _options_ param when initializing the client.
-- [ ] Create custom HTTP client to make authenticated requests
+- [x] Create custom HTTP client to make authenticated requests
 
 ### APIs integration
 
