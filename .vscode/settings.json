@@ -9,15 +9,13 @@
     "**/node_modules": true
   },
   "conventionalCommits.scopes": [
-    // Dependencies
     "deps",
     "dev-deps",
     "peer-deps",
-
-    // Gelato API Scopes
     "orders",
     "products",
-    "shipment"
+    "shipment",
+    "http"
   ],
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
