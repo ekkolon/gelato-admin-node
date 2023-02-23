@@ -16,3 +16,4 @@
  */
 
 export * from './lib/shipment';
+export * from './lib/shipment_api';
