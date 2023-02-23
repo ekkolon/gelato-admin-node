@@ -15,6 +15,24 @@
  * limitations under the License.
  */
 
-export function products(): string {
-  return 'products';
+export interface StockAvailabilityRequest {
+  /**
+   * List of productUids to check availability for.
+   */
+  data: string[];
+}
+
+export interface Availability {
+  stockRegionUid: string;
+  status: string;
+  replenishmentDate: string | null;
+}
+
+export interface ProductAvailability {
+  productUid: string;
+  availability: Availability;
+}
+
+export interface GetStockAvailabilityResponse {
+  productsAvailability: ProductAvailability;
 }
