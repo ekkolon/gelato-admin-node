@@ -19,7 +19,8 @@
     "paths": {
       "@gelato/apis/orders": ["packages/apis/orders/src/index.ts"],
       "@gelato/apis/products": ["packages/apis/products/src/index.ts"],
-      "@gelato/apis/shipment": ["packages/apis/shipment/src/index.ts"]
+      "@gelato/apis/shipment": ["packages/apis/shipment/src/index.ts"],
+      "@gelato/shared/http": ["packages/shared/http/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
