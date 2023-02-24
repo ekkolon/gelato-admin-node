@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { combineURLs } from '@gelato/shared/http';
+import { combineURLs } from '../../utils/urls';
 
 const ORDERS_API_ROOT_URI = 'https://order.gelatoapis.com/v4/';
 

@@ -15,8 +15,15 @@
  * limitations under the License.
  */
 
-import { HttpClient } from '@gelato/shared/http';
-
+import { Client } from '../../client';
+import { BaseAPI } from '../api-service';
+import {
+  getOrderCancelURL,
+  getOrderQuoteURL,
+  getOrdersSearchURL,
+  getOrdersURL,
+  getOrderURL,
+} from './constants';
 import {
   CreateOrderRequest,
   GetOrderResponse,
@@ -26,13 +33,6 @@ import {
   SearchOrdersRequest,
   SearchOrdersResponse,
 } from './order';
-import {
-  getOrderCancelURL,
-  getOrderQuoteURL,
-  getOrdersSearchURL,
-  getOrdersURL,
-  getOrderURL,
-} from './utils/urls';
 
 /**
  * @description
@@ -43,8 +43,10 @@ import {
  *
  * @publicApi
  */
-export class OrdersAPI {
-  constructor(private readonly httpClient: HttpClient) {}
+export class OrdersAPI extends BaseAPI {
+  constructor(client: Client) {
+    super(client);
+  }
 
   /**
    * Retrieve a list of orders.

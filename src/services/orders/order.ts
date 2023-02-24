@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { ShipmentMethodType } from '@gelato/apis/shipment';
+import { ShipmentMethodType } from '../shipment/shipment';
 
 export type OrderChannel = 'ui' | 'api' | 'shopify' | 'etsy';
 
