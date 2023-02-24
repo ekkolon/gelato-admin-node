@@ -15,10 +15,11 @@
  * limitations under the License.
  */
 
-import { HttpClient } from '@gelato/shared/http';
+import { Client } from '../../client';
+import { BaseAPI } from '../api-service';
 
 import { GetShipmentMethodsQueryParams, GetShipmentMethodsResponse } from './shipment';
-import { getShipmentMethodsURL } from './utils/urls';
+import { getShipmentMethodsURL } from './constants';
 
 /**
  * @description
@@ -29,8 +30,10 @@ import { getShipmentMethodsURL } from './utils/urls';
  *
  * @publicApi
  */
-export class ShipmentAPI {
-  constructor(private readonly httpClient: HttpClient) {}
+export class ShipmentAPI extends BaseAPI {
+  constructor(client: Client) {
+    super(client);
+  }
 
   /**
    * Get information about each shipment method that Gelato provides.
