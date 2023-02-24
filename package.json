@@ -1,5 +1,5 @@
 {
-  "name": "gelato-node",
+  "name": "gelato-admin",
   "version": "0.1.0",
   "author": "Nelson Dominguez <18242749+ekkolon@users.noreply.github.com>",
   "license": "Apache-2.0",
@@ -7,8 +7,11 @@
     "node": ">=16",
     "yarn": "^1.22.19"
   },
-  "type": "module",
-  "scripts": {},
+  "scripts": {
+    "build": "gulp build",
+    "prepare": "yarn run build && yarn run generate-esm",
+    "generate-esm": "node scripts/generate-esm.js"
+  },
   "private": true,
   "keywords": [
     "gelato",
@@ -17,6 +20,45 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/ekkolon/gelato-node"
+  },
+  "main": "lib/index.js",
+  "files": [
+    "lib/",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "types": "./lib/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "orders": [
+        "lib/services/orders"
+      ],
+      "products": [
+        "lib/services/products"
+      ],
+      "shipment": [
+        "lib/services/shipment"
+      ]
+    }
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./orders": {
+      "types": "./lib/services/orders/index.d.ts",
+      "require": "./lib/services/orders/index.js",
+      "import": "./lib/esm/orders/index.js"
+    },
+    "./products": {
+      "types": "./lib/services/products/index.d.ts",
+      "require": "./lib/services/products/index.js",
+      "import": "./lib/esm/products/index.js"
+    },
+    "./shipment": {
+      "types": "./lib/services/shipment/index.d.ts",
+      "require": "./lib/services/shipment/index.js",
+      "import": "./lib/esm/shipment/index.js"
+    }
   },
   "dependencies": {
     "axios": "^1.3.4",
@@ -29,13 +71,19 @@
     "@nrwl/linter": "15.7.2",
     "@nrwl/node": "^15.7.2",
     "@nrwl/workspace": "^15.7.2",
+    "@types/gulp": "^4.0.10",
+    "@types/gulp-filter": "^3.0.35",
     "@types/jest": "28.1.1",
     "@types/node": "16.11.7",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
+    "del": "^7.0.0",
     "dotenv": "^16.0.3",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
+    "gulp": "^4.0.2",
+    "gulp-filter": "^7.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "nx": "15.7.2",
@@ -43,8 +91,5 @@
     "ts-jest": "28.0.5",
     "ts-node": "10.9.1",
     "typescript": "^4.9.5"
-  },
-  "workspaces": [
-    "packages/*"
-  ]
+  }
 }
