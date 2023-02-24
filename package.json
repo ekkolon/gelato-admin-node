@@ -7,8 +7,11 @@
     "node": ">=16",
     "yarn": "^1.22.19"
   },
-  "type": "module",
-  "scripts": {},
+  "scripts": {
+    "build": "gulp build",
+    "prepare": "yarn run build && yarn run generate-esm",
+    "generate-esm": "node scripts/generate-esm.js"
+  },
   "private": true,
   "keywords": [
     "gelato",
