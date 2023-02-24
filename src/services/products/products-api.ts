@@ -15,13 +15,10 @@
  * limitations under the License.
  */
 
-import { HttpClient } from '@gelato/shared/http';
+import { Client } from '../../client';
+import { BaseAPI } from '../api-service';
 
 import { GetCatalogResponse, GetCatalogsResponse } from './catalog';
-import { GetCoverDimensionsResponse } from './cover-dimensions';
-import { GetPricesResponse } from './prices';
-import { GetProductResponse, GetProductsFilter, GetProductsResponse } from './product';
-import { GetStockAvailabilityResponse } from './stock-availability';
 import {
   getCatalogsURL,
   getCatalogURL,
@@ -30,7 +27,11 @@ import {
   getProductsStockAvailabilityURL,
   getProductsURL,
   getProductURL,
-} from './utils/urls';
+} from './constants';
+import { GetCoverDimensionsResponse } from './cover-dimensions';
+import { GetPricesResponse } from './prices';
+import { GetProductResponse, GetProductsFilter, GetProductsResponse } from './product';
+import { GetStockAvailabilityResponse } from './stock-availability';
 
 /**
  * @description
@@ -41,8 +42,10 @@ import {
  *
  * @publicApi
  */
-export class ProductsAPI {
-  constructor(private readonly httpClient: HttpClient) {}
+export class ProductsAPI extends BaseAPI {
+  constructor(client: Client) {
+    super(client);
+  }
 
   /**
    * Retrieve a list of available catalogs.
