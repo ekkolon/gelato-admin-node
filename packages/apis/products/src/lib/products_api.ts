@@ -22,6 +22,15 @@ import { GetCoverDimensionsResponse } from './cover-dimensions';
 import { GetPricesResponse } from './prices';
 import { GetProductResponse, GetProductsFilter, GetProductsResponse } from './product';
 import { GetStockAvailabilityResponse } from './stock-availability';
+import {
+  getCatalogsURL,
+  getCatalogURL,
+  getProductCoverDimensionsURL,
+  getProductPricesURL,
+  getProductsStockAvailabilityURL,
+  getProductsURL,
+  getProductURL,
+} from './utils/urls';
 
 /**
  * @description
@@ -39,8 +48,9 @@ export class ProductsAPI {
    * Retrieve a list of available catalogs.
    * @returns A promise resolving with a list of `Catalog` objects.
    */
-  getCatalogs(): Promise<GetCatalogsResponse> {
-    throw new Error('Not implemented');
+  async getCatalogs(): Promise<GetCatalogsResponse> {
+    const url = getCatalogsURL();
+    return this.httpClient.get<GetCatalogsResponse>(url);
   }
 
   /**
@@ -50,8 +60,9 @@ export class ProductsAPI {
    * @param catalogId The `id` of the catalog to fetch.
    * @returns A promise resolving with a `Catalog` object that contains product attributes.
    */
-  getCatalog(catalogId: string): Promise<GetCatalogResponse> {
-    throw new Error('Not implemented');
+  async getCatalog(catalogId: string): Promise<GetCatalogResponse> {
+    const url = getCatalogURL(catalogId);
+    return this.httpClient.get<GetCatalogResponse>(url);
   }
 
   /**
@@ -61,8 +72,12 @@ export class ProductsAPI {
    * @returns A promisve resolving with an object that contains the list of products,
    *  and `hits` for provided _filter_ param (if applicable).
    */
-  getProducts(catalogId: string, filter: GetProductsFilter): Promise<GetProductsResponse> {
-    throw new Error('Not implemented');
+  async getProducts(
+    catalogId: string,
+    filter: GetProductsFilter = {},
+  ): Promise<GetProductsResponse> {
+    const url = getProductsURL(catalogId);
+    return this.httpClient.post<GetProductsResponse, GetProductsFilter>(url, filter);
   }
 
   /**
@@ -70,8 +85,9 @@ export class ProductsAPI {
    * @param productId The `id` of the product to fetch.
    * @returns A promise resolving with an object containing product details.
    */
-  getProduct(productId: string): Promise<GetProductResponse> {
-    throw new Error('Not implemented');
+  async getProduct(productId: string): Promise<GetProductResponse> {
+    const url = getProductURL(productId);
+    return this.httpClient.get<GetProductResponse>(url);
   }
 
   /**
@@ -79,8 +95,9 @@ export class ProductsAPI {
    * @param productId The `id` of the product.
    * @returns A promise resolving with a list of `Price` objects.
    */
-  getProductPrices(productId: string): Promise<GetPricesResponse> {
-    throw new Error('Not implemented');
+  async getProductPrices(productId: string): Promise<GetPricesResponse> {
+    const url = getProductPricesURL(productId);
+    return this.httpClient.get<GetPricesResponse>(url);
   }
 
   /**
@@ -90,8 +107,9 @@ export class ProductsAPI {
    * @returns A promise resolving with an object containing details about
    *  the dimensions of the cover of the product by provided `productId`.
    */
-  getCoverDimensions(productId: string): Promise<GetCoverDimensionsResponse> {
-    throw new Error('Not implemented');
+  async getCoverDimensions(productId: string): Promise<GetCoverDimensionsResponse> {
+    const url = getProductCoverDimensionsURL(productId);
+    return this.httpClient.get<GetCoverDimensionsResponse>(url);
   }
 
   /**
@@ -99,7 +117,8 @@ export class ProductsAPI {
    * @param productIds A list of product ids for which to get availability details.
    * @returns A promise resolving with an object containing products availability details.
    */
-  getStockAvailability(productIds: string[]): Promise<GetStockAvailabilityResponse> {
-    throw new Error('Not implemented');
+  async getStockAvailability(productIds: string[]): Promise<GetStockAvailabilityResponse> {
+    const url = getProductsStockAvailabilityURL();
+    return this.httpClient.post<GetStockAvailabilityResponse, string[]>(url, productIds);
   }
 }
