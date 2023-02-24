@@ -26,6 +26,13 @@ import {
   SearchOrdersRequest,
   SearchOrdersResponse,
 } from './order';
+import {
+  getOrderCancelURL,
+  getOrderQuoteURL,
+  getOrdersSearchURL,
+  getOrdersURL,
+  getOrderURL,
+} from './utils/urls';
 
 /**
  * @description
@@ -45,7 +52,8 @@ export class OrdersAPI {
    * @returns A promise resolving with a list of orders found.
    */
   getOrders(filter: SearchOrdersRequest = {}): Promise<SearchOrdersResponse> {
-    throw new Error('Not implemented');
+    const url = getOrdersSearchURL();
+    return this.httpClient.post<SearchOrdersResponse, SearchOrdersRequest>(url, filter);
   }
 
   /**
@@ -54,7 +62,8 @@ export class OrdersAPI {
    * @returns A promise resolving with details about the order by provided `orderId`.
    */
   getOrder(orderId: string): Promise<GetOrderResponse> {
-    throw new Error('Not implemented');
+    const url = getOrderURL(orderId);
+    return this.httpClient.get<GetOrderResponse>(url);
   }
 
   /**
@@ -63,7 +72,8 @@ export class OrdersAPI {
    * @returns A promise resolving with the newly created `Order` object.
    */
   createOrder(data: CreateOrderRequest): Promise<GetOrderResponse> {
-    throw new Error('Not implemented');
+    const url = getOrdersURL();
+    return this.httpClient.post<GetOrderResponse, CreateOrderRequest>(url, data);
   }
 
   /**
@@ -74,7 +84,8 @@ export class OrdersAPI {
    * @returns A promise resolving with details about the order by provided `orderId`
    */
   patchDraftOrder(orderId: string, data: PatchOrderRequest): Promise<GetOrderResponse> {
-    throw new Error('Not implemented');
+    const url = getOrderURL(orderId);
+    return this.httpClient.patch<GetOrderResponse, PatchOrderRequest>(url, data);
   }
 
   /**
@@ -86,7 +97,8 @@ export class OrdersAPI {
    *  Otherwise, an error is thrown.
    */
   cancelOrder(orderId: string): Promise<true> {
-    throw new Error('Not implemented');
+    const url = getOrderCancelURL(orderId);
+    return this.httpClient.post<true, undefined>(url, undefined);
   }
 
   /**
@@ -94,8 +106,9 @@ export class OrdersAPI {
    * Note: Only orders having orderType equal to `draft` can be deleted.
    * @param orderId The `id` of the order to delete.
    */
-  deleteDraftOrder(orderId: string): Promise<any> {
-    throw new Error('Not implemented');
+  deleteDraftOrder(orderId: string): Promise<unknown> {
+    const url = getOrderURL(orderId);
+    return this.httpClient.delete<unknown>(url);
   }
 
   /**
@@ -105,6 +118,7 @@ export class OrdersAPI {
    *  and the list of orders.
    */
   quoteOrder(data: QuoteOrderRequest): Promise<QuoteOrderResponse> {
-    throw new Error('Not implemented');
+    const url = getOrderQuoteURL();
+    return this.httpClient.post<QuoteOrderResponse, QuoteOrderRequest>(url, data);
   }
 }
