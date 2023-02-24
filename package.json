@@ -18,6 +18,45 @@
     "type": "git",
     "url": "https://github.com/ekkolon/gelato-node"
   },
+  "main": "lib/index.js",
+  "files": [
+    "lib/",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "types": "./lib/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "orders": [
+        "lib/services/orders"
+      ],
+      "products": [
+        "lib/services/products"
+      ],
+      "shipment": [
+        "lib/services/shipment"
+      ]
+    }
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./orders": {
+      "types": "./lib/services/orders/index.d.ts",
+      "require": "./lib/services/orders/index.js",
+      "import": "./lib/esm/orders/index.js"
+    },
+    "./products": {
+      "types": "./lib/services/products/index.d.ts",
+      "require": "./lib/services/products/index.js",
+      "import": "./lib/esm/products/index.js"
+    },
+    "./shipment": {
+      "types": "./lib/services/shipment/index.d.ts",
+      "require": "./lib/services/shipment/index.js",
+      "import": "./lib/esm/shipment/index.js"
+    }
+  },
   "dependencies": {
     "axios": "^1.3.4",
     "tslib": "^2.3.0"
