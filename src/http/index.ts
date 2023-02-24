@@ -15,5 +15,4 @@
  * limitations under the License.
  */
 
-export * from './lib/http';
-export * from './lib/utils';
+export * from './http-client';
