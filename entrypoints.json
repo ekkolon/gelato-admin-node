@@ -1,0 +1,14 @@
+{
+  "gelato-admin/orders": {
+    "typings": "./lib/services/orders/index.d.ts",
+    "dist": "./lib/services/orders/index.js"
+  },
+  "gelato-admin/products": {
+    "typings": "./lib/services/products/index.d.ts",
+    "dist": "./lib/services/products/index.js"
+  },
+  "gelato-admin/shipment": {
+    "typings": "./lib/services/shipment/index.d.ts",
+    "dist": "./lib/services/shipment/index.js"
+  }
+}
