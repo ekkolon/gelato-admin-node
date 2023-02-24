@@ -15,8 +15,6 @@
  * limitations under the License.
  */
 
-export const PRODUCT_CATALOGS_ENDPOINT = 'https://product.gelatoapis.com/v3/catalogs';
-
 /**
  *
  * @publicApi
