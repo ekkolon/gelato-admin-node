@@ -18,6 +18,7 @@
 import { HttpClient } from '@gelato/shared/http';
 
 import { GetShipmentMethodsQueryParams, GetShipmentMethodsResponse } from './shipment';
+import { getShipmentMethodsURL } from './utils/urls';
 
 /**
  * @description
@@ -37,7 +38,10 @@ export class ShipmentAPI {
    * @param filter Query parameters to filter shipment methods by.
    * @returns A promise resolving with available shipment methods in Gelato.
    */
-  getShipmentMethods(filter: GetShipmentMethodsQueryParams): Promise<GetShipmentMethodsResponse> {
-    throw new Error('Not implemented');
+  getShipmentMethods(
+    filter: GetShipmentMethodsQueryParams = {},
+  ): Promise<GetShipmentMethodsResponse> {
+    const url = getShipmentMethodsURL();
+    return this.httpClient.get<GetShipmentMethodsResponse>(url, { params: filter });
   }
 }
