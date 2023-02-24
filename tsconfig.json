@@ -1,0 +1,30 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "module": "NodeNext",
+    "target": "es2020",
+    "sourceMap": true,
+    "declaration": true,
+    "types": ["node"],
+    "moduleResolution": "NodeNext",
+    //"importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "lib": ["es2021"],
+    "outDir": "lib",
+    "stripInternal": true,
+    "rootDir": ".",
+    "baseUrl": "."
+  },
+  "files": ["src/index.ts"],
+  // these options are overrides used only by ts-node
+  "ts-node": {
+    "compilerOptions": {
+      "module": "NodeNext"
+    }
+  }
+}
