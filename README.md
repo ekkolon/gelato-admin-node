@@ -30,28 +30,28 @@ See [Gelato API Docs](https://dashboard.gelato.com/docs/) for more details.
 
 _In no particular order._
 
-- [ ] **Gelato Orders API (v4 only)**
-  - [ ] Create Order
-  - [ ] Get Order
-  - [ ] Search Orders
-  - [ ] Cancel Orders
-  - [ ] Quote Order
-  - [ ] Patch Draft Order
-  - [ ] Delete Draft Order
-- [ ] **Gelato Products API**
-  - [ ] Catalog
-    - [ ] List Catalogs
-    - [ ] Get Catalog
-  - [ ] Product
-    - [ ] Search Products
-    - [ ] Get Product
-    - [ ] Get Product Cover Dimensions
-  - [ ] Price
-    - [ ] Get Product Prices
-  - [ ] Stock Availability
-    - [ ] Get Product Stock Availability
-- [ ] **Gelato Shipment API**
-  - [ ] Get Shipment Methods
+- [x] **Gelato Orders API (v4 only)**
+  - [x] Create Order
+  - [x] Get Order
+  - [x] Search Orders
+  - [x] Cancel Orders
+  - [x] Quote Order
+  - [x] Patch Draft Order
+  - [x] Delete Draft Order
+- [x] **Gelato Products API**
+  - [x] Catalog
+    - [x] List Catalogs
+    - [x] Get Catalog
+  - [x] Product
+    - [x] Search Products
+    - [x] Get Product
+    - [x] Get Product Cover Dimensions
+  - [x] Price
+    - [x] Get Product Prices
+  - [x] Stock Availability
+    - [x] Get Product Stock Availability
+- [x] **Gelato Shipment API**
+  - [x] Get Shipment Methods
 
 ## License
 
