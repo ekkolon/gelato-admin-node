@@ -15,10 +15,10 @@
  * limitations under the License.
  */
 
-import { GelatoClient } from './gelato-client';
-import { Client, ClientOptions } from './core';
-import { ClientErrorCode, GelatoClientError } from '../utils/error';
+import { ClientErrorCode, ClientErrorMessage, GelatoClientError } from '../utils/error';
 import { isNonEmptyString } from '../utils/validator';
+import { Client, ClientOptions } from './core';
+import { GelatoClient } from './gelato-client';
 
 const DEFAULT_CLIENT_NAME = '[DEFAULT]';
 
@@ -29,24 +29,18 @@ export class ClientStore {
     if (typeof clientName !== 'string' || clientName === '') {
       throw new GelatoClientError(
         ClientErrorCode.INVALID_CLIENT_NAME,
-        `Invalid Gelato client name "${clientName}" provided. Client name must be a non-empty string.`,
+        ClientErrorMessage.INVALID_CLIENT_NAME.replace('{{clientName}}', clientName),
       );
     } else if (this.clientStore.has(clientName)) {
       if (clientName === DEFAULT_CLIENT_NAME) {
         throw new GelatoClientError(
           ClientErrorCode.DUPLICATE_CLIENT,
-          'The default Gelato client already exists. This means you called initializeClient() ' +
-            'more than once without providing an app name as the second argument. In most cases ' +
-            'you only need to call initializeClient() once. But if you do want to initialize ' +
-            'multiple clients, pass a second argument to initializeClient() to give each client a unique ' +
-            'name.',
+          ClientErrorMessage.DUPLICATE_DEFAULT_CLIENT_NAME,
         );
       } else {
         throw new GelatoClientError(
           ClientErrorCode.DUPLICATE_CLIENT,
-          `Gelato client named "${clientName}" already exists. This means you called initializeClient() ` +
-            'more than once with the same client name as the second argument. Make sure you provide a ' +
-            'unique name every time you call initializeClient().',
+          ClientErrorMessage.DUBPLICATE_CLIENT_NAME.replace('{{clientName}}', clientName),
         );
       }
     }
@@ -72,7 +66,7 @@ export class ClientStore {
     if (typeof clientName !== 'string' || clientName === '') {
       throw new GelatoClientError(
         ClientErrorCode.INVALID_CLIENT_NAME,
-        `Invalid Gelato client name "${clientName}" provided. Client name must be a non-empty string.`,
+        ClientErrorMessage.INVALID_CLIENT_NAME.replace('{{clientName}}', clientName),
       );
     } else if (!this.clientStore.has(clientName)) {
       let errorMessage: string =
