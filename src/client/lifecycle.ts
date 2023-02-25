@@ -20,7 +20,8 @@ import { isNonEmptyString } from '../utils/validator';
 import { Client, ClientOptions } from './core';
 import { GelatoClient } from './gelato-client';
 
-const DEFAULT_CLIENT_NAME = '[DEFAULT]';
+/** @internal */
+export const DEFAULT_CLIENT_NAME = '[DEFAULT]';
 
 export class ClientStore {
   private readonly clientStore = new Map<string, GelatoClient>();
