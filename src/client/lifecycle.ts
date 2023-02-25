@@ -27,7 +27,7 @@ export class ClientStore {
   private readonly clientStore = new Map<string, GelatoClient>();
 
   initializeClient(options?: ClientOptions, clientName: string = DEFAULT_CLIENT_NAME) {
-    if (typeof clientName !== 'string' || clientName === '') {
+    if (!isNonEmptyString(clientName)) {
       throw new GelatoClientError(
         ClientErrorCode.INVALID_CLIENT_NAME,
         ClientErrorMessage.INVALID_CLIENT_NAME.replace('{{clientName}}', clientName),
@@ -64,7 +64,7 @@ export class ClientStore {
   }
 
   getClient(clientName: string = DEFAULT_CLIENT_NAME): Client {
-    if (typeof clientName !== 'string' || clientName === '') {
+    if (!isNonEmptyString(clientName)) {
       throw new GelatoClientError(
         ClientErrorCode.INVALID_CLIENT_NAME,
         ClientErrorMessage.INVALID_CLIENT_NAME.replace('{{clientName}}', clientName),
