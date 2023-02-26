@@ -4,7 +4,7 @@
   "author": "Nelson Dominguez <18242749+ekkolon@users.noreply.github.com>",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=16",
+    "node": ">=18",
     "yarn": "^1.22.19"
   },
   "scripts": {
@@ -75,7 +75,7 @@
     "@types/gulp-filter": "^3.0.35",
     "@types/jest": "28.1.1",
     "@types/lodash": "^4.14.191",
-    "@types/node": "16.11.7",
+    "@types/node": "^18.14.1",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
     "del": "^7.0.0",
