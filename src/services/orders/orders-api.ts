@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { Client } from '../../client';
+import { GelatoClient } from '../../client/gelato-client';
 import { BaseAPI } from '../api-service';
 import {
   getOrderCancelURL,
@@ -44,7 +44,7 @@ import {
  * @publicApi
  */
 export class OrdersAPI extends BaseAPI {
-  constructor(client: Client) {
+  constructor(client: GelatoClient) {
     super(client);
   }
 

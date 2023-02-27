@@ -24,7 +24,6 @@ export interface ClientOptions extends HttpClientOptions {}
 export interface Client {
   name: string;
   options: ClientOptions;
-  readonly httpClient: HttpClient;
 }
 
 /**

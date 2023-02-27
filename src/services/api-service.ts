@@ -16,12 +16,13 @@
  */
 
 import { Client, HttpClient } from '../client';
+import { GelatoClient } from '../client/gelato-client';
 
 /** @internal */
 export abstract class BaseAPI {
-  private readonly client_: Client;
+  private readonly client_: GelatoClient;
 
-  constructor(client: Client) {
+  constructor(client: GelatoClient) {
     this.client_ = client;
   }
 
@@ -29,7 +30,7 @@ export abstract class BaseAPI {
     return this.client_;
   }
 
-  get httpClient(): HttpClient {
+  protected get httpClient(): HttpClient {
     return this.client_.httpClient;
   }
 }
