@@ -31,7 +31,18 @@ export interface Catalog {
   title: string;
 }
 
-export type GetCatalogsResponse = Catalog[];
+export type CatalogPagination = { total: number; offset: number };
+
+export type GetCatalogsResponse = {
+  /**
+   * Array of catalogs.
+   */
+  data: Catalog[];
+  /**
+   * Object containing pagination information.
+   */
+  pagination: CatalogPagination;
+};
 
 export interface CatalogProductAttributeValue {
   /**
