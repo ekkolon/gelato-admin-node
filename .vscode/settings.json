@@ -12,6 +12,7 @@
     "deps",
     "dev-deps",
     "peer-deps",
+    "client",
     "orders",
     "products",
     "shipment",
