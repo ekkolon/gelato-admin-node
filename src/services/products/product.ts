@@ -39,12 +39,14 @@ export interface MeasureUnit {
   measureUnit: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AttributeHits = Record<string, any>;
 
 export interface FilterHits {
   attributeHits: AttributeHits;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ProductAttributes = Record<string, any>;
 
 export interface Product {

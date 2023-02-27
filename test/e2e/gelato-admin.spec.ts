@@ -85,6 +85,7 @@ describe('Gelato Admin', () => {
 
     describe('productsAPI#getCatalog', () => {
       it('should return a catalog by id using the first item in the catalogs response', async () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         catalog = await productsAPI.getCatalog((catalogs as any).data[0].catalogUid);
         expect(catalog).toBeDefined();
       });
@@ -160,7 +161,7 @@ describe('Gelato Admin', () => {
   });
 
   describe('gelato-admin/shipment', () => {
-    let shipmentAPI: ShipmentAPI = getShipmentAPI(defaultGelatoClient);
+    const shipmentAPI = getShipmentAPI(defaultGelatoClient);
 
     describe('getShipmentAPI', () => {
       runServiceInitTest('ShipmentAPI', shipmentAPI, ShipmentAPI, envConfig);
@@ -179,7 +180,7 @@ describe('Gelato Admin', () => {
   });
 
   describe('gelato-admin/orders', () => {
-    let ordersAPI: OrdersAPI = getOrdersAPI(defaultGelatoClient);
+    const ordersAPI = getOrdersAPI(defaultGelatoClient);
 
     describe('getOrdersAPI', () => {
       runServiceInitTest('OrdersAPI', ordersAPI, OrdersAPI, envConfig);
@@ -188,10 +189,13 @@ describe('Gelato Admin', () => {
     let placedDraftOrder: GetOrderResponse;
     describe('ordersAPI#createDraftOrder', () => {
       it('should create a new draft order', async () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const mockedOrder = ordersMock.newDraftOrder as any;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const newOrder = (await ordersAPI.createOrder(mockedOrder)) as any;
         expect(newOrder.id).toBeDefined();
         ordersMock.REQUIRED_ORDER_FIELDS.forEach((field) =>
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           expect((newOrder as any)[field]).toBe(mockedOrder[field]),
         );
         ordersMock.SHIPPING_ADDRESS_FIELDS.forEach((field) =>
@@ -237,14 +241,14 @@ describe('Gelato Admin', () => {
 
       it('should return a list of orders by country "DE"', async () => {
         const response = await ordersAPI.getOrders({
-          countries: [placedDraftOrder?.shippingAddress?.country!],
+          countries: [placedDraftOrder?.shippingAddress?.country as string],
         });
         expect(response.orders.length).toBeGreaterThan(0);
       });
 
       it('should return a list of orders by country "DE"', async () => {
         const response = await ordersAPI.getOrders({
-          countries: [placedDraftOrder?.shippingAddress?.country!],
+          countries: [placedDraftOrder?.shippingAddress?.country as string],
         });
         expect(response.orders.length).toBeGreaterThan(0);
       });
@@ -260,6 +264,7 @@ describe('Gelato Admin', () => {
     describe('ordersAPI#quoteOrder()', () => {
       it('should quote an order', async () => {
         const {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           orderType,
           items: products,
           shippingAddress: recipient,
@@ -318,7 +323,7 @@ describe('Gelato Admin', () => {
 function runServiceInitTest(
   name: string,
   serviceInstance: BaseAPI,
-  expectedType: any,
+  expectedType: typeof BaseAPI,
   env: GelatoEnvConfig,
 ) {
   it(`should return an instance of ${name}`, async () => {

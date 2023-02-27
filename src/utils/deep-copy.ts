@@ -43,6 +43,7 @@ const hasOwnProp = (obj: unknown, prop: string): boolean => {
  * @param source - The value whose properties are extending the target.
  * @returns The target value.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function deepExtend(target: any, source: any): any {
   if (!(source instanceof Object)) {
     return source;
@@ -52,6 +53,7 @@ export function deepExtend(target: any, source: any): any {
     case Date: {
       // Treat Dates like scalars; if the target date object had any child
       // properties - they will be lost!
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const dateValue = source as any as Date;
       return new Date(dateValue.getTime());
     }

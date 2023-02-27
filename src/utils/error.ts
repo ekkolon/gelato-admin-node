@@ -37,7 +37,7 @@ export class GelatoError extends Error implements GelatoErrorInterface {
     /* tslint:disable:max-line-length */
     // Set the prototype explicitly. See the following link for more details:
     // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
-    /* tslint:enable:max-line-length */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (this as any).__proto__ = GelatoError.prototype;
   }
 
@@ -78,7 +78,7 @@ export class PrefixedGelatoError extends GelatoError {
     /* tslint:disable:max-line-length */
     // Set the prototype explicitly. See the following link for more details:
     // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
-    /* tslint:enable:max-line-length */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (this as any).__proto__ = PrefixedGelatoError.prototype;
   }
 
@@ -108,7 +108,7 @@ export class GelatoClientError extends PrefixedGelatoError {
     /* tslint:disable:max-line-length */
     // Set the prototype explicitly. See the following link for more details:
     // https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes#extending-built-ins-like-error-array-and-map-may-no-longer-work
-    /* tslint:enable:max-line-length */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (this as any).__proto__ = GelatoClientError.prototype;
   }
 }
