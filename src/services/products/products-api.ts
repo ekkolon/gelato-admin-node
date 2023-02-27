@@ -105,9 +105,12 @@ export class ProductsAPI extends BaseAPI {
    * @returns A promise resolving with an object containing details about
    *  the dimensions of the cover of the product by provided `productId`.
    */
-  async getCoverDimensions(productId: string): Promise<GetCoverDimensionsResponse> {
+  async getCoverDimensions(
+    productId: string,
+    config: { params: { pageCount: number } },
+  ): Promise<GetCoverDimensionsResponse> {
     const url = getProductCoverDimensionsURL(productId);
-    return this.httpClient.get<GetCoverDimensionsResponse>(url);
+    return this.httpClient.get<GetCoverDimensionsResponse>(url, config);
   }
 
   /**
