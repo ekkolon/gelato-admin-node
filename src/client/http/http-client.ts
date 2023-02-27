@@ -15,18 +15,21 @@
  * limitations under the License.
  */
 
-import axios, { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios';
+import {
+  delete as makeDeleteRequest,
+  get as makeGetRequest,
+  patch as makePatchRequest,
+  post as makePostRequest,
+} from 'axios';
 
-import { GELATO_API_HEADER_KEY, GELATO_API_KEY_VAR } from 'src/utils/env';
+import { HttpClientBase, HttpClientBaseOptions, HttpRequestConfigInit } from './http-client-base';
 
 /**
  * Options to customize how a Gelato {@link HttpClient} processes requests.
  *
  * @publicApi
  */
-export interface HttpClientOptions {
-  apiKey?: string;
-}
+export type HttpClientOptions = HttpClientBaseOptions;
 
 /**
  * HTTP client for making (authenticated) requests to Gelato APIs.
@@ -47,17 +50,16 @@ export interface HttpClientOptions {
  *
  * @publicApi
  */
-export class HttpClient {
-  constructor(private readonly options: HttpClientOptions) {}
-
+export class HttpClient extends HttpClientBase {
   /**
    * Make a `GET` request to an eligable Gelato API endpoint.
    * @param url Resource URL to fetch.
    * @param options Options to customize the request.
    * @returns
    */
-  async get<T>(url: string, options: AxiosRequestConfig = {}): Promise<T> {
-    const response = await axios.get<T>(url, this._mergeRequestConfig(options));
+  async get<T>(url: string, options: HttpRequestConfigInit = {}): Promise<T> {
+    const config = this.getRequestConfig(options);
+    const response = await makeGetRequest<T>(url, config);
 
     return response.data;
   }
@@ -67,13 +69,9 @@ export class HttpClient {
    * @param url Target url to request data from.
    * @param options Options to customize the request.
    */
-  async post<T, D>(
-    url: string,
-    data: D,
-    options: Omit<AxiosRequestConfig<D>, 'data'> = {},
-  ): Promise<T> {
-    const response = await axios.post<T>(url, data, this._mergeRequestConfig(options));
-
+  async post<T, D>(url: string, data: D, options: HttpRequestConfigInit = {}): Promise<T> {
+    const config = this.getRequestConfig(options);
+    const response = await makePostRequest<T>(url, data, config);
     return response.data;
   }
   /**
@@ -81,9 +79,9 @@ export class HttpClient {
    * @param url Resource URL to patch.
    * @param options Options to customize the request.
    */
-  async patch<T, D>(url: string, data: D, options: Omit<AxiosRequestConfig<D>, 'data'> = {}) {
-    const response = await axios.patch<T>(url, data, this._mergeRequestConfig(options));
-
+  async patch<T, D>(url: string, data: D, options: HttpRequestConfigInit = {}) {
+    const config = this.getRequestConfig(options);
+    const response = await makePatchRequest<T>(url, data, config);
     return response.data;
   }
   /**
@@ -91,38 +89,9 @@ export class HttpClient {
    * @param url Resource URL to delete.
    * @param options Options to customize the request.
    */
-  async delete<T = any>(url: string, options: Omit<AxiosRequestConfig, 'data'> = {}) {
-    const response = await axios.delete<T>(url, this._mergeRequestConfig(options));
-
+  async delete<T = any>(url: string, options: HttpRequestConfigInit = {}) {
+    const config = this.getRequestConfig(options);
+    const response = await makeDeleteRequest<T>(url, config);
     return response.data;
-  }
-
-  private _mergeRequestConfig(options: AxiosRequestConfig) {
-    const { headers, ...requestOptions } = options;
-    return { ...requestOptions, headers: this._mergeRequestHeaders(headers) };
-  }
-
-  private _mergeRequestHeaders(
-    axiosHeaders: AxiosRequestConfig['headers'],
-  ): RawAxiosRequestHeaders {
-    return { ...axiosHeaders, 'Content-Type': 'application/json', ...this._getAuthHeader() };
-  }
-
-  private _getAuthHeader() {
-    const apikKey = this.getApiKey();
-    return { [GELATO_API_HEADER_KEY]: apikKey };
-  }
-
-  private getApiKey(): string {
-    const apiKey = this.options?.apiKey ?? process.env[GELATO_API_KEY_VAR];
-    if (!this.checkApiKeyValue(apiKey)) {
-      throw new Error(`Requests to the Gelato API must use an '${GELATO_API_HEADER_KEY}' header.`);
-    }
-
-    return apiKey;
-  }
-
-  private checkApiKeyValue(apiKey: unknown): apiKey is string {
-    return apiKey != null && typeof apiKey === 'string' && apiKey.length > 0;
   }
 }

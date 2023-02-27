@@ -15,8 +15,7 @@
  * limitations under the License.
  */
 
-import { Client } from '../client';
-import { HttpClient } from '../http';
+import { Client, HttpClient } from '../client';
 
 /** @internal */
 export abstract class BaseAPI {

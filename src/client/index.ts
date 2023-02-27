@@ -16,4 +16,5 @@
  */
 
 export { Client, ClientOptions, GelatoError } from './core';
+export { HttpClient, HttpClientOptions } from './http';
 export { getClient, getClients, initializeClient } from './lifecycle';
