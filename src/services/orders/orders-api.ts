@@ -15,8 +15,8 @@
  * limitations under the License.
  */
 
-import { GelatoClient } from '../../client/gelato-client';
 import { BaseAPI } from '../api-service';
+
 import {
   getOrderCancelURL,
   getOrderQuoteURL,
@@ -44,10 +44,6 @@ import {
  * @publicApi
  */
 export class OrdersAPI extends BaseAPI {
-  constructor(client: GelatoClient) {
-    super(client);
-  }
-
   /**
    * Retrieve a list of orders.
    * @param filter An object containing filter properties to customize the query.
