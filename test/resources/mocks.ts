@@ -26,6 +26,8 @@ export const clientOptions: ClientOptions = { apiKey };
 
 export const clientOptionsNoApiKey: ClientOptions = {};
 
+export const clientOptionsInvalidApiKey: ClientOptions = { apiKey: '' };
+
 export function client() {
   return new GelatoClient(clientOptions, clientName);
 }
