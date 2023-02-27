@@ -16,11 +16,8 @@
  */
 
 import { GelatoClient } from '../../../src/client/gelato-client';
-import {
-  ClientStore,
-  DEFAULT_CLIENT_NAME,
-  GELATO_API_KEY_VAR,
-} from '../../../src/client/lifecycle';
+import { ClientStore, DEFAULT_CLIENT_NAME } from '../../../src/client/lifecycle';
+import { GELATO_API_KEY_VAR } from '../../../src/utils/env';
 import { ClientErrorCode, ClientErrorMessage, GelatoClientError } from '../../../src/utils/error';
 
 import * as mocks from '../../resources/mocks';
@@ -84,13 +81,26 @@ describe('ClientStore', () => {
       expect(initializeClientCall).toThrowError(invalidClientNameError);
     });
 
-    it('should throw when no apiKey option is not provided', () => {
+    it(`should throw when neither 'option.apiKey' & ${GELATO_API_KEY_VAR} is available`, () => {
       const initializeClientCall = () =>
-        mockClientStore.initializeClient(mocks.clientOptionsNoApiKey, 'mock-client-no-api-key');
+        mockClientStore.initializeClient(
+          mocks.clientOptionsNoApiKey,
+          'mock-client-no-api-key-provided',
+        );
+
+      expect(initializeClientCall).toThrowError(GelatoClientError);
+    });
+
+    it('should throw when an empty apiKey is provided', () => {
+      const initializeClientCall = () =>
+        mockClientStore.initializeClient(
+          mocks.clientOptionsInvalidApiKey,
+          'mock-client-invalid-api-key',
+        );
 
       const expectedError = new GelatoClientError(ClientErrorCode.NO_API_KEY, 'Invalid API_KEY');
 
-      expect(initializeClientCall).toThrowError(expectedError);
+      expect(initializeClientCall).toThrow(GelatoClientError);
     });
 
     it('should return an instance of GelatoClient', () => {

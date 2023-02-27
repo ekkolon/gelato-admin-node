@@ -15,6 +15,7 @@
  * limitations under the License.
  */
 
+import { loadEnvConfig } from '../utils/env';
 import { ClientErrorCode, ClientErrorMessage, GelatoClientError } from '../utils/error';
 import { isNonEmptyString } from '../utils/validator';
 import { Client, ClientOptions } from './core';
@@ -46,16 +47,16 @@ export class ClientStore {
       }
     }
 
-    if (typeof options === 'undefined') {
-      options = {};
+    options = { ...options };
+
+    if (options.apiKey && !isNonEmptyString(options.apiKey)) {
+      throw new GelatoClientError(ClientErrorCode.NO_API_KEY, `Invalid API_KEY`);
     }
 
-    // Attempt getting options from environment variable.
-    // Right now only the `apiKey` is required.
-    options.apiKey = options.apiKey ?? process.env[GELATO_API_KEY_VAR];
-
-    if (!isNonEmptyString(options.apiKey)) {
-      throw new GelatoClientError(ClientErrorCode.NO_API_KEY, `Invalid API_KEY`);
+    if (!options.apiKey) {
+      // Attempt getting options from environment variable.
+      const env = loadEnvConfig();
+      options.apiKey = env.apiKey;
     }
 
     const client = new GelatoClient(options, clientName);
@@ -106,8 +107,3 @@ export function getClient(clientName: string = DEFAULT_CLIENT_NAME): Client {
 export function getClients(): Client[] {
   return defaultClientStore.getClients();
 }
-
-/**
- * Constant holding the environment variable name with the default `apiKey`.
- */
-export const GELATO_API_KEY_VAR = 'GELATO_API_KEY';

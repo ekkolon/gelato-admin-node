@@ -18,7 +18,7 @@
 import _ from 'lodash';
 
 import { GelatoClient } from '../../../src/client/gelato-client';
-import { GELATO_API_KEY_VAR } from '../../../src/client/lifecycle';
+import { GELATO_API_KEY_VAR } from '../../../src/utils/env';
 import * as mocks from '../../resources/mocks';
 
 describe('GelatoClient', () => {
