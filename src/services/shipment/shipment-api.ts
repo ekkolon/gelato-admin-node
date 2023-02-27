@@ -15,11 +15,11 @@
  * limitations under the License.
  */
 
-import { Client } from '../../client';
 import { BaseAPI } from '../api-service';
 
-import { GetShipmentMethodsQueryParams, GetShipmentMethodsResponse } from './shipment';
+import { GelatoClient } from '../../client/gelato-client';
 import { getShipmentMethodsURL } from './constants';
+import { GetShipmentMethodsQueryParams, GetShipmentMethodsResponse } from './shipment';
 
 /**
  * @description
@@ -31,7 +31,7 @@ import { getShipmentMethodsURL } from './constants';
  * @publicApi
  */
 export class ShipmentAPI extends BaseAPI {
-  constructor(client: Client) {
+  constructor(client: GelatoClient) {
     super(client);
   }
 
