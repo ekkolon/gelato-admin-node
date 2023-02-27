@@ -117,6 +117,8 @@ export class ProductsAPI extends BaseAPI {
    */
   async getStockAvailability(productIds: string[]): Promise<GetStockAvailabilityResponse> {
     const url = getProductsStockAvailabilityURL();
-    return this.httpClient.post<GetStockAvailabilityResponse, string[]>(url, productIds);
+    return this.httpClient.post<GetStockAvailabilityResponse, { products: string[] }>(url, {
+      products: productIds,
+    });
   }
 }
