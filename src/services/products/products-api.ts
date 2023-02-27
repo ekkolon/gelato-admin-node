@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-import { GelatoClient } from '../../client/gelato-client';
 import { BaseAPI } from '../api-service';
 
 import { GetCatalogResponse, GetCatalogsResponse } from './catalog';
@@ -43,10 +42,6 @@ import { GetStockAvailabilityResponse } from './stock-availability';
  * @publicApi
  */
 export class ProductsAPI extends BaseAPI {
-  constructor(client: GelatoClient) {
-    super(client);
-  }
-
   /**
    * Retrieve a list of available catalogs.
    * @returns A promise resolving with a list of `Catalog` objects.

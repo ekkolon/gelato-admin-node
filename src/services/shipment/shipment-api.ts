@@ -17,7 +17,6 @@
 
 import { BaseAPI } from '../api-service';
 
-import { GelatoClient } from '../../client/gelato-client';
 import { getShipmentMethodsURL } from './constants';
 import { GetShipmentMethodsQueryParams, GetShipmentMethodsResponse } from './shipment';
 
@@ -31,10 +30,6 @@ import { GetShipmentMethodsQueryParams, GetShipmentMethodsResponse } from './shi
  * @publicApi
  */
 export class ShipmentAPI extends BaseAPI {
-  constructor(client: GelatoClient) {
-    super(client);
-  }
-
   /**
    * Get information about each shipment method that Gelato provides.
    * The shipping methods can be filtered on shipment destination country.
