@@ -98,7 +98,7 @@ describe('ClientStore', () => {
           'mock-client-invalid-api-key',
         );
 
-      const expectedError = new GelatoClientError(ClientErrorCode.NO_API_KEY, 'Invalid API_KEY');
+      // const expectedError = new GelatoClientError(ClientErrorCode.NO_API_KEY, 'Invalid API_KEY');
 
       expect(initializeClientCall).toThrow(GelatoClientError);
     });

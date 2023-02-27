@@ -54,7 +54,7 @@ gulp.task('compile', () => {
 
   const configuration = ['lib/**/*.js', 'lib/**/*.d.ts'];
 
-  workflow = workflow.pipe(filter(configuration)) as any;
+  workflow = workflow.pipe(filter(configuration)) as never;
 
   // Write to build directory
   return workflow.pipe(gulp.dest(paths.build));

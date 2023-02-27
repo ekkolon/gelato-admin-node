@@ -33,7 +33,7 @@ export function client() {
 }
 
 export function clientWithOptions(options: ClientOptions) {
-  return new GelatoClient(clientOptions, clientName);
+  return new GelatoClient(options, clientName);
 }
 
 export function clientProvidingUndefinedApiKey(): GelatoClient {

@@ -59,7 +59,9 @@ export class HttpClientBase {
    * @param headerOptions - Additional headers to be added to the request.
    * @returns The request headers to be used for all requests.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected getRequestHeaders(headerOptions: HttpRequestHeadersInit = {}): Record<string, any> {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const headers: Record<string, any> = {
       ...headerOptions,
       'Content-Type': 'application/json',

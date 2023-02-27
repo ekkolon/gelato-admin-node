@@ -46,6 +46,7 @@ describe('GelatoClient', () => {
 
     it('should be read-only', () => {
       expect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (mockClient as any).name = 'foo';
       }).toThrow('Cannot set property name of #<GelatoClient> which has only a getter');
     });
@@ -58,12 +59,14 @@ describe('GelatoClient', () => {
 
     it('should be read-only', () => {
       expect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (mockClient as any).options = {};
       }).toThrow('Cannot set property options of #<GelatoClient> which has only a getter');
     });
 
     it('should not return an object which can mutate the underlying options', () => {
       const original = _.clone(mockClient.options);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (mockClient.options as any).foo = 'changed';
       expect(mockClient.options).toStrictEqual(original);
     });

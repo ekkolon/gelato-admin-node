@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { HttpClient, HttpClientOptions } from './http';
+import { HttpClientOptions } from './http';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ClientOptions extends HttpClientOptions {}

@@ -89,7 +89,7 @@ export class HttpClient extends HttpClientBase {
    * @param url Resource URL to delete.
    * @param options Options to customize the request.
    */
-  async delete<T = any>(url: string, options: HttpRequestConfigInit = {}) {
+  async delete<T = unknown>(url: string, options: HttpRequestConfigInit = {}) {
     const config = this.getRequestConfig(options);
     const response = await makeDeleteRequest<T>(url, config);
     return response.data;
