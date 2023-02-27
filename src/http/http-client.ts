@@ -17,8 +17,7 @@
 
 import axios, { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios';
 
-export const API_KEY_HEADER = 'X-API-KEY';
-export const API_KEY_ENV_VARIABLE = 'GELATO_API_KEY';
+import { GELATO_API_HEADER_KEY, GELATO_API_KEY_VAR } from 'src/utils/env';
 
 /**
  * Options to customize how a Gelato {@link HttpClient} processes requests.
@@ -111,13 +110,13 @@ export class HttpClient {
 
   private _getAuthHeader() {
     const apikKey = this.getApiKey();
-    return { [API_KEY_HEADER]: apikKey };
+    return { [GELATO_API_HEADER_KEY]: apikKey };
   }
 
   private getApiKey(): string {
-    const apiKey = this.options?.apiKey ?? process.env[API_KEY_ENV_VARIABLE];
+    const apiKey = this.options?.apiKey ?? process.env[GELATO_API_KEY_VAR];
     if (!this.checkApiKeyValue(apiKey)) {
-      throw new Error(`Requests to the Gelato API must use an '${API_KEY_HEADER}' header.`);
+      throw new Error(`Requests to the Gelato API must use an '${GELATO_API_HEADER_KEY}' header.`);
     }
 
     return apiKey;
