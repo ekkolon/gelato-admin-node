@@ -1,8 +1,10 @@
 {
   "name": "gelato-admin",
   "version": "0.1.0",
+  "description": "A lightweight Node.js client for the Gelato API",
   "author": "Nelson Dominguez <18242749+ekkolon@users.noreply.github.com>",
   "license": "Apache-2.0",
+  "homepage": "https://github.com/ekkolon/gelato-admin-node#readme",
   "engines": {
     "node": ">=16"
   },
@@ -18,11 +20,20 @@
   "private": true,
   "keywords": [
     "gelato",
-    "api"
+    "api",
+    "gelato api",
+    "print-on-demand",
+    "pod",
+    "client",
+    "node",
+    "typescript"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ekkolon/gelato-node"
+    "url": "https://github.com/ekkolon/gelato-admin-node"
+  },
+  "bugs": {
+    "url": "https://github.com/ekkolon/gelato-admin-node/issues"
   },
   "main": "lib/index.js",
   "files": [
