@@ -4,8 +4,7 @@
   "author": "Nelson Dominguez <18242749+ekkolon@users.noreply.github.com>",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=16",
-    "yarn": "^1.22.19"
+    "node": ">=16"
   },
   "scripts": {
     "build": "gulp build",
