@@ -65,12 +65,7 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@nrwl/eslint-plugin-nx": "15.7.2",
     "@nrwl/jest": "15.7.2",
-    "@nrwl/js": "15.7.2",
-    "@nrwl/linter": "15.7.2",
-    "@nrwl/node": "^15.7.2",
-    "@nrwl/workspace": "^15.7.2",
     "@types/gulp": "^4.0.10",
     "@types/gulp-filter": "^3.0.35",
     "@types/jest": "28.1.1",
@@ -87,9 +82,7 @@
     "gulp-filter": "^7.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "jest": "28.1.1",
-    "jest-environment-jsdom": "28.1.1",
     "lodash": "^4.17.21",
-    "nx": "15.7.2",
     "prettier": "^2.6.2",
     "ts-jest": "28.0.5",
     "ts-node": "10.9.1",
