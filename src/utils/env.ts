@@ -54,7 +54,7 @@ export function loadEnvConfig(throwIfNoApiKey = true): Partial<GelatoEnvConfig> 
 
   if (!apiKey && throwIfNoApiKey) {
     const errMessage =
-      `Failed to load environment configuration: No API key found. ` +
+      'Failed to load environment configuration: No API key found. ' +
       `Make sure to set the ${GELATO_API_KEY_VAR} environment variable.`;
     throw new GelatoClientError(ClientErrorCode.NO_API_KEY, errMessage);
   }

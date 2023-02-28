@@ -123,7 +123,8 @@ describe('ClientStore', () => {
     });
 
     it('should throw when the default clientName does not exist', () => {
-      const expectedErrorMessage = `The default Gelato client does not exist. Make sure you call initializeClient() before using any of the Gelato API services.`;
+      const expectedErrorMessage =
+        'The default Gelato client does not exist. Make sure you call initializeClient() before using any of the Gelato API services.';
       const expectedError = makeNoClientError(expectedErrorMessage);
       expect(() => new ClientStore().getClient(DEFAULT_CLIENT_NAME)).toThrowError(expectedError);
     });

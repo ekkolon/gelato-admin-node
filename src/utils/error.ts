@@ -122,7 +122,7 @@ export enum ClientErrorCode {
 }
 
 export enum ClientErrorMessage {
-  INVALID_CLIENT_NAME = `Invalid Gelato client name "{{clientName}}" provided. Client name must be a non-empty string.`,
+  INVALID_CLIENT_NAME = 'Invalid Gelato client name "{{clientName}}" provided. Client name must be a non-empty string.',
   DUPLICATE_DEFAULT_CLIENT_NAME = `The default Gelato client already exists. This means you called initializeClient()
 more than once without providing an client name as the second argument. In most cases
 you only need to call initializeClient() once. But if you do want to initialize

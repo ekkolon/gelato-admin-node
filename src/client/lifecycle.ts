@@ -52,7 +52,7 @@ export class ClientStore {
     options.apiKey = options.apiKey ?? loadEnvConfig(false).apiKey;
 
     if (!isNonEmptyString(options.apiKey)) {
-      throw new GelatoClientError(ClientErrorCode.NO_API_KEY, `Invalid API_KEY`);
+      throw new GelatoClientError(ClientErrorCode.NO_API_KEY, 'Invalid API_KEY');
     }
 
     const client = new GelatoClient(options, clientName);
