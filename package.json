@@ -1,6 +1,6 @@
 {
   "name": "gelato-admin",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A lightweight Node.js client for the Gelato API",
   "author": "Nelson Dominguez <18242749+ekkolon@users.noreply.github.com>",
   "license": "Apache-2.0",
@@ -17,7 +17,6 @@
     "test:e2e": "jest --config jest.config.ts --testPathPattern test/e2e",
     "generate-esm": "node scripts/generate-esm.js"
   },
-  "private": true,
   "keywords": [
     "gelato",
     "api",
