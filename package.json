@@ -10,6 +10,8 @@
   "scripts": {
     "build": "gulp build",
     "prepare": "yarn run build && yarn run generate-esm",
+    "lint": "eslint '**/*.ts'",
+    "lint:fix": "eslint --fix '**/*.ts'",
     "generate-esm": "node scripts/generate-esm.js"
   },
   "private": true,
