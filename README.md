@@ -1,4 +1,4 @@
-# Gelato API - Node.js Client
+# Gelato Node.js SDK
 
 A lightweight Node.js SDK to seamlessly integrate [Gelato](https://dashboard.gelato.com/docs/)'s powerful print-on-demand services into your Node applications.
 
