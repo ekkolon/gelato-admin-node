@@ -783,19 +783,19 @@
   dependencies:
     "@types/node" "*"
 
-"@types/gulp-filter@^3.0.35":
-  version "3.0.35"
-  resolved "https://registry.npmjs.org/@types/gulp-filter/-/gulp-filter-3.0.35.tgz"
-  integrity sha512-xBdmHVMnPvAdwyLDFD2Yi8lYXXhYlMWnsWxvMPiinj8b7LJmzNKloI4TQyod+WXEfbiUsHULp0q0qdCIXBVRDQ==
+"@types/gulp-filter@^3.0.36":
+  version "3.0.36"
+  resolved "https://registry.yarnpkg.com/@types/gulp-filter/-/gulp-filter-3.0.36.tgz#218c0aed702a8ff62c52ead9184237c5a9efbbaf"
+  integrity sha512-7vyA4kvAsQZYUZr3jsjkCnRXw8Sn2Wwm8xyHBA1wfCZ5dEWH1foWZvlCAN3JnLNJl/miPxttpnhLWEVotZ2V2w==
   dependencies:
     "@types/minimatch" "*"
     "@types/node" "*"
     "@types/vinyl" "*"
 
-"@types/gulp@^4.0.10":
-  version "4.0.10"
-  resolved "https://registry.npmjs.org/@types/gulp/-/gulp-4.0.10.tgz"
-  integrity sha512-spgZHJFqiEJGwqGlf7T/k4nkBpBcLgP7T0EfN6G2vvnhUfvd4uO1h8RwpXOE8x/54DVYUs1XCAtBHkX/R3axAQ==
+"@types/gulp@^4.0.13":
+  version "4.0.13"
+  resolved "https://registry.yarnpkg.com/@types/gulp/-/gulp-4.0.13.tgz#033fff1f56c01e3c98ac76ee27361c01bcb08865"
+  integrity sha512-Ms20Q2tZ3MpThZGn4Ag6e7ifz/oQJFxsuiopqz5oHmhE6q2ohnELgafi5K/pKX/4ntlpidS61v/TXAguYsVcaA==
   dependencies:
     "@types/undertaker" ">=1.2.6"
     "@types/vinyl-fs" "*"
@@ -833,10 +833,10 @@
   resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.11.tgz"
   integrity sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==
 
-"@types/lodash@^4.14.191":
-  version "4.14.191"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.191.tgz#09511e7f7cba275acd8b419ddac8da9a6a79e2fa"
-  integrity sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==
+"@types/lodash@^4.14.197":
+  version "4.14.197"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.197.tgz#e95c5ddcc814ec3e84c891910a01e0c8a378c54b"
+  integrity sha512-BMVOiWs0uNxHVlHBgzTIqJYmj+PgCo4euloGF+5m4okL3rEYzM2EEv78mw8zWSMM57dM7kVIgJ2QDvwHSoCI5g==
 
 "@types/minimatch@*", "@types/minimatch@^5.1.2":
   version "5.1.2"
