@@ -1,6 +1,6 @@
 {
   "name": "gelato-admin",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A lightweight Node.js client for the Gelato API",
   "author": "Nelson Dominguez <18242749+ekkolon@users.noreply.github.com>",
   "license": "Apache-2.0",
@@ -11,8 +11,8 @@
   "scripts": {
     "build": "gulp build",
     "prepare": "yarn run build && yarn run generate-esm",
-    "lint": "eslint '**/*.ts'",
-    "lint:fix": "eslint --fix '**/*.ts'",
+    "lint": "eslint \"**/*.ts\"",
+    "lint:fix": "eslint --fix \"**/*.ts\"",
     "test": "jest --config jest.config.ts --testPathPattern test/unit",
     "test:e2e": "jest --config jest.config.ts --testPathPattern test/e2e",
     "generate-esm": "node scripts/generate-esm.js"
