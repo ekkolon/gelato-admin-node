@@ -90,7 +90,6 @@
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "glob-parent": "^6.0.2",
     "gulp": "^4.0.2",
     "gulp-filter": "^7.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
