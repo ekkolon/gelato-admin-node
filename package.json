@@ -77,7 +77,6 @@
     "axios": "^1.5.0"
   },
   "devDependencies": {
-    "@nrwl/jest": "15.7.2",
     "@types/gulp": "^4.0.13",
     "@types/gulp-filter": "^3.0.36",
     "@types/jest": "28.1.1",
