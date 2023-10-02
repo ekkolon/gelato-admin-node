@@ -44,7 +44,7 @@ export type HttpClientOptions = HttpClientBaseOptions;
  *
  *    Make sure the current node process contains this variable,
  *    either by directly assigning it when running your server process
- *    or by using a _.env_ file and loading it before starting the process.
+ *    or by using a `.env` file and loading it before starting the process.
  *
  * @todo Improve response object - provide more context, like statusCode, url.
  *
