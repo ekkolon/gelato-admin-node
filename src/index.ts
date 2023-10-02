@@ -24,7 +24,7 @@ gelato-admin appears to have been installed in an unsupported environment.
 This package should only be used in server-side or backend Node.js environments,
 and should not be used in web browsers or other client-side environments.
 `;
-  // tslint:disable-next-line:no-console
+  // eslint-disable-next-line no-console
   console.error(message);
 }
 
