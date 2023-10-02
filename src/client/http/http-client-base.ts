@@ -33,20 +33,22 @@ export interface HttpClientBaseOptions {
   apiKey?: string;
 }
 
+/**
+ * Provides basic methods shared by all `HttpClient` instances.
+ *
+ * @internal
+ */
 export class HttpClientBase {
   #options: HttpClientBaseOptions;
 
-  /**
-   *
-   */
   constructor(options: HttpClientBaseOptions) {
     this.#options = options;
   }
 
   /**
-   * Returns the request headers to be used for all requests.
-   * @param headerOptions - Additional headers to be added to the request.
-   * @returns The request headers to be used for all requests.
+   * Merge an *incoming* (axios) request config object with internal http config.
+   * @param requestOptions - Incoming request config object.
+   * @returns The merged Axios request config object.
    */
   protected getRequestConfig(requestOptions: HttpRequestConfigInit = {}): AxiosRequestConfig {
     const { headers: headersInit, ...otherOptions } = requestOptions;
@@ -55,7 +57,7 @@ export class HttpClientBase {
   }
 
   /**
-   * Returns the request headers to be used for all requests.
+   * Returns the request headers to be used for all requests made to the Gelato API.
    * @param headerOptions - Additional headers to be added to the request.
    * @returns The request headers to be used for all requests.
    */
@@ -70,6 +72,7 @@ export class HttpClientBase {
     if (this.#options.apiKey) {
       headers[GELATO_API_HEADER_KEY] = this.#options.apiKey;
     }
+    
     return headers;
   }
 }
