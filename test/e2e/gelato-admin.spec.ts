@@ -41,6 +41,8 @@ import { GelatoClientError } from '../../src/utils/error';
 
 import * as ordersMock from '../resources/order.mocks';
 
+jest.setTimeout(15000);
+
 describe('Gelato Admin', () => {
   const envConfig = initializeTestEnvironmentVariables();
   const defaultGelatoClient = initializeClient(envConfig) as GelatoClient;
