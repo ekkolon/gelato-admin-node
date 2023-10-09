@@ -51,7 +51,7 @@ export class OrdersAPI extends BaseAPI {
    */
   getOrders(filter: SearchOrdersRequest = {}): Promise<SearchOrdersResponse> {
     const url = getOrdersSearchURL();
-    return this.httpClient.post<SearchOrdersResponse, SearchOrdersRequest>(url, filter);
+    return this.httpClient.get<SearchOrdersResponse>(url, { params: filter });
   }
 
   /**
