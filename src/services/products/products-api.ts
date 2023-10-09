@@ -16,18 +16,9 @@
  */
 
 import { BaseAPI } from '../api-service';
-
 import { GetCatalogResponse, GetCatalogsResponse } from './catalog';
-import {
-  getCatalogsURL,
-  getCatalogURL,
-  getProductCoverDimensionsURL,
-  getProductPricesURL,
-  getProductsStockAvailabilityURL,
-  getProductsURL,
-  getProductURL,
-} from './constants';
 import { GetCoverDimensionsResponse } from './cover-dimensions';
+import * as endpoints from './endpoints';
 import { GetPricesResponse } from './prices';
 import { GetProductResponse, GetProductsFilter, GetProductsResponse } from './product';
 import { GetStockAvailabilityResponse } from './stock-availability';
@@ -47,8 +38,7 @@ export class ProductsAPI extends BaseAPI {
    * @returns A promise resolving with a list of `Catalog` objects.
    */
   async getCatalogs(): Promise<GetCatalogsResponse> {
-    const url = getCatalogsURL();
-    return this.httpClient.get<GetCatalogsResponse>(url);
+    return this.httpClient.get<GetCatalogsResponse>(endpoints.CATALOGS);
   }
 
   /**
@@ -59,8 +49,7 @@ export class ProductsAPI extends BaseAPI {
    * @returns A promise resolving with a `Catalog` object that contains product attributes.
    */
   async getCatalog(catalogId: string): Promise<GetCatalogResponse> {
-    const url = getCatalogURL(catalogId);
-    return this.httpClient.get<GetCatalogResponse>(url);
+    return this.httpClient.get<GetCatalogResponse>(endpoints.getCatalog(catalogId));
   }
 
   /**
@@ -74,8 +63,10 @@ export class ProductsAPI extends BaseAPI {
     catalogId: string,
     filter: GetProductsFilter = {},
   ): Promise<GetProductsResponse> {
-    const url = getProductsURL(catalogId);
-    return this.httpClient.post<GetProductsResponse, GetProductsFilter>(url, filter);
+    return this.httpClient.post<GetProductsResponse, GetProductsFilter>(
+      endpoints.getCatalogProducts(catalogId),
+      filter,
+    );
   }
 
   /**
@@ -84,8 +75,7 @@ export class ProductsAPI extends BaseAPI {
    * @returns A promise resolving with an object containing product details.
    */
   async getProduct(productId: string): Promise<GetProductResponse> {
-    const url = getProductURL(productId);
-    return this.httpClient.get<GetProductResponse>(url);
+    return this.httpClient.get<GetProductResponse>(endpoints.getProduct(productId));
   }
 
   /**
@@ -94,8 +84,7 @@ export class ProductsAPI extends BaseAPI {
    * @returns A promise resolving with a list of `Price` objects.
    */
   async getProductPrices(productId: string): Promise<GetPricesResponse> {
-    const url = getProductPricesURL(productId);
-    return this.httpClient.get<GetPricesResponse>(url);
+    return this.httpClient.get<GetPricesResponse>(endpoints.getProductPrices(productId));
   }
 
   /**
@@ -109,8 +98,10 @@ export class ProductsAPI extends BaseAPI {
     productId: string,
     config: { params: { pageCount: number } },
   ): Promise<GetCoverDimensionsResponse> {
-    const url = getProductCoverDimensionsURL(productId);
-    return this.httpClient.get<GetCoverDimensionsResponse>(url, config);
+    return this.httpClient.get<GetCoverDimensionsResponse>(
+      endpoints.getProductCoverDimensions(productId),
+      config,
+    );
   }
 
   /**
@@ -119,9 +110,9 @@ export class ProductsAPI extends BaseAPI {
    * @returns A promise resolving with an object containing products availability details.
    */
   async getStockAvailability(productIds: string[]): Promise<GetStockAvailabilityResponse> {
-    const url = getProductsStockAvailabilityURL();
-    return this.httpClient.post<GetStockAvailabilityResponse, { products: string[] }>(url, {
-      products: productIds,
-    });
+    return this.httpClient.post<GetStockAvailabilityResponse, { products: string[] }>(
+      endpoints.STOCK_AVAILABILITY,
+      { products: productIds },
+    );
   }
 }

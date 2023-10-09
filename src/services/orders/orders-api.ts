@@ -16,14 +16,7 @@
  */
 
 import { BaseAPI } from '../api-service';
-
-import {
-  getOrderCancelURL,
-  getOrderQuoteURL,
-  getOrdersSearchURL,
-  getOrdersURL,
-  getOrderURL,
-} from './constants';
+import * as endpoints from './endpoints';
 import {
   CreateOrderRequest,
   GetOrderResponse,
@@ -50,8 +43,7 @@ export class OrdersAPI extends BaseAPI {
    * @returns A promise resolving with a list of orders found.
    */
   getOrders(filter: SearchOrdersRequest = {}): Promise<SearchOrdersResponse> {
-    const url = getOrdersSearchURL();
-    return this.httpClient.get<SearchOrdersResponse>(url, { params: filter });
+    return this.httpClient.get<SearchOrdersResponse>(endpoints.SEARCH_ORDERS, { params: filter });
   }
 
   /**
@@ -60,8 +52,7 @@ export class OrdersAPI extends BaseAPI {
    * @returns A promise resolving with details about the order by provided `orderId`.
    */
   getOrder(orderId: string): Promise<GetOrderResponse> {
-    const url = getOrderURL(orderId);
-    return this.httpClient.get<GetOrderResponse>(url);
+    return this.httpClient.get<GetOrderResponse>(endpoints.getOrder(orderId));
   }
 
   /**
@@ -70,8 +61,7 @@ export class OrdersAPI extends BaseAPI {
    * @returns A promise resolving with the newly created `Order` object.
    */
   createOrder(data: CreateOrderRequest): Promise<GetOrderResponse> {
-    const url = getOrdersURL();
-    return this.httpClient.post<GetOrderResponse, CreateOrderRequest>(url, data);
+    return this.httpClient.post<GetOrderResponse, CreateOrderRequest>(endpoints.GET_ORDERS, data);
   }
 
   /**
@@ -82,8 +72,10 @@ export class OrdersAPI extends BaseAPI {
    * @returns A promise resolving with details about the order by provided `orderId`
    */
   patchDraftOrder(orderId: string, data: PatchOrderRequest): Promise<GetOrderResponse> {
-    const url = getOrderURL(orderId);
-    return this.httpClient.patch<GetOrderResponse, PatchOrderRequest>(url, data);
+    return this.httpClient.patch<GetOrderResponse, PatchOrderRequest>(
+      endpoints.getOrder(orderId),
+      data,
+    );
   }
 
   /**
@@ -95,8 +87,7 @@ export class OrdersAPI extends BaseAPI {
    *  Otherwise, an error is thrown.
    */
   cancelOrder(orderId: string): Promise<true> {
-    const url = getOrderCancelURL(orderId);
-    return this.httpClient.post<true, undefined>(url, undefined);
+    return this.httpClient.post<true, undefined>(endpoints.cancelOrder(orderId), undefined);
   }
 
   /**
@@ -105,8 +96,7 @@ export class OrdersAPI extends BaseAPI {
    * @param orderId The `id` of the order to delete.
    */
   deleteDraftOrder(orderId: string): Promise<unknown> {
-    const url = getOrderURL(orderId);
-    return this.httpClient.delete<unknown>(url);
+    return this.httpClient.delete<unknown>(endpoints.getOrder(orderId));
   }
 
   /**
@@ -116,7 +106,6 @@ export class OrdersAPI extends BaseAPI {
    *  and the list of orders.
    */
   quoteOrder(data: QuoteOrderRequest): Promise<QuoteOrderResponse> {
-    const url = getOrderQuoteURL();
-    return this.httpClient.post<QuoteOrderResponse, QuoteOrderRequest>(url, data);
+    return this.httpClient.post<QuoteOrderResponse, QuoteOrderRequest>(endpoints.QUOTE_ORDER, data);
   }
 }

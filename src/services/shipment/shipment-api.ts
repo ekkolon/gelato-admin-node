@@ -16,8 +16,7 @@
  */
 
 import { BaseAPI } from '../api-service';
-
-import { getShipmentMethodsURL } from './constants';
+import * as endpoints from './endpoints';
 import { GetShipmentMethodsQueryParams, GetShipmentMethodsResponse } from './shipment';
 
 /**
@@ -37,9 +36,8 @@ export class ShipmentAPI extends BaseAPI {
    * @returns A promise resolving with available shipment methods in Gelato.
    */
   getShipmentMethods(
-    filter: GetShipmentMethodsQueryParams = {},
+    params: GetShipmentMethodsQueryParams = {},
   ): Promise<GetShipmentMethodsResponse> {
-    const url = getShipmentMethodsURL();
-    return this.httpClient.get<GetShipmentMethodsResponse>(url, { params: filter });
+    return this.httpClient.get<GetShipmentMethodsResponse>(endpoints.SHIPMENT_METHODS, { params });
   }
 }
