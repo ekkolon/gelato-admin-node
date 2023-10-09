@@ -36,10 +36,12 @@ import {
   ProductsAPI,
 } from '../../src/services/products';
 import { getShipmentAPI, ShipmentAPI } from '../../src/services/shipment';
-import { GelatoEnvConfig, GELATO_API_KEY_VAR, loadEnvConfig } from '../../src/utils/env';
+import { GELATO_API_KEY_VAR, GelatoEnvConfig, loadEnvConfig } from '../../src/utils/env';
 import { GelatoClientError } from '../../src/utils/error';
 
 import * as ordersMock from '../resources/order.mocks';
+
+jest.setTimeout(15000);
 
 describe('Gelato Admin', () => {
   const envConfig = initializeTestEnvironmentVariables();
@@ -68,8 +70,6 @@ describe('Gelato Admin', () => {
       runServiceInitTest('ProductsAPI', productsAPI, ProductsAPI, envConfig);
     });
 
-    let catalog: GetCatalogResponse;
-
     describe('productsAPI#getCatalogs', () => {
       it('should return an object with a `data` and `pagination` property', async () => {
         catalogs = await productsAPI.getCatalogs();
@@ -77,11 +77,13 @@ describe('Gelato Admin', () => {
         expect(catalogs).toHaveProperty('pagination');
       });
 
-      it('should contain a list of catalogs in the `data` with a length > 0', async () => {
+      it('should contain a list of catalogs in the `data` with a length > 0', () => {
         expect(catalogs.data).toBeInstanceOf(Array);
         expect(catalogs.data.length).toBeGreaterThan(0);
       });
     });
+
+    let catalog: GetCatalogResponse;
 
     describe('productsAPI#getCatalog', () => {
       it('should return a catalog by id using the first item in the catalogs response', async () => {
