@@ -42,44 +42,131 @@ export type OrderFinancialStatus =
   | 'refunded'
   | 'refused';
 
+/**
+ * The currency, in ISO 4217 format, an order should be or was charged in.
+ */
+export type Currency =
+  | 'EUR'
+  | 'USD'
+  | 'JPY'
+  | 'BGN'
+  | 'CZK'
+  | 'DKK'
+  | 'GBP'
+  | 'HUF'
+  | 'PLN'
+  | 'RON'
+  | 'SEK'
+  | 'CHF'
+  | 'ISK'
+  | 'NOK'
+  | 'HRK'
+  | 'RUB'
+  | 'TRY'
+  | 'AUD'
+  | 'BRL'
+  | 'CAD'
+  | 'CNY'
+  | 'HKD'
+  | 'IDR'
+  | 'ILS'
+  | 'INR'
+  | 'KRW'
+  | 'MXN'
+  | 'MYR'
+  | 'NZD'
+  | 'PHP'
+  | 'SGD'
+  | 'THB'
+  | 'ZAR'
+  | 'CLP'
+  | 'AED';
+
 export interface GetOrderResponse {
   /** Gelato order id. */
   id: string;
-  /** Type of the order. It can be order or draft. Draft orders can be edited from the dashboard and they don't go into production until you decide to convert draft into a regular order via UI or programmatically via Order Patch API. */
+
+  /**
+   * Type of the order. It can be order or draft.
+   *
+   * Draft orders can be edited from the dashboard and they don't go into production
+   * until you decide to convert draft into a regular order via UI or programmatically
+   * via Order Patch API.
+   */
   orderType: string;
+
   /** Reference to your internal order id. */
+
   orderReferenceId: string;
+
   /** Reference to your internal customer id. */
   customerReferenceId: string;
-  /** The order current fulfillment status. Can be: created, passed, failed, canceled, printed, shipped, draft, pending_approval, not_connected, on_hold. */
+
+  /**
+   * The order's current fulfillment status.
+   *
+   * @see {@link OrderFulfillmentStatus }
+   */
   fulfillmentStatus: OrderFulfillmentStatus;
-  /** The order current financial status. Can be: draft, pending, invoiced, to_be_invoiced, paid, canceled, partially_refunded, refunded and refused. */
+
+  /**
+   * The order current financial status.
+   *
+   * @see {@link OrderFinancialStatus }
+   */
   financialStatus: OrderFinancialStatus;
-  /** The order currency in iso code standard ISO 4217. */
-  currency: string;
-  /** The order channel. Can be: ui, api, shopify and etsy. */
+
+  /**
+   * The order currency code in ISO 4217 format.
+   *
+   * @see {@link Currency}
+   */
+  currency: Currency;
+
+  /**
+   * The order channel.
+   *
+   * @see {@link OrderChannel }
+   */
   channel: OrderChannel;
-  /** E-commerce store ID identifying which store the order was placed in. It will be null if the order was placed via UI or API. */
+
+  /**
+   * E-commerce store ID identifying which store the order was placed in.
+   * It will be null if the order was placed via UI or API.
+   */
   storeId?: string;
+
   /** Date and time in ISO 8601 format when order was created. */
   createdAt: string;
+
   /** Date and time in ISO 8601 format when order was updated. */
   updatedAt: string;
+
   /** Date and time in ISO 8601 format when order was placed. */
   orderedAt: string;
+
   /** List of order items. */
   items: ItemObject[];
+
   /** Information about shipment. */
   shipment?: ShipmentObject;
+
   /** Billing recipient. */
   billingEntity?: BillingEntityObject;
+
   /** Shipping address. */
   shippingAddress?: OrderGetShippingAddressObject;
+
   /** Return address. */
   returnAddress?: ReturnAddressObject;
+
   /** List of order receipts. */
   receipts: ReceiptObject[];
-  /** List of connected order IDs. Used when an order needs to be produced in multiple locations for example. Read more here. */
+
+  /**
+   * List of connected order IDs.
+   * Used when an order needs to be produced in multiple locations for example.
+   */
   connectedOrderIds?: string[];
 }
 
@@ -87,7 +174,7 @@ export interface ReceiptObject {
   id: string;
   orderId: string;
   transactionType: string;
-  currency: string;
+  currency: Currency;
   items: ReceiptItemObject[];
   productsPriceInitial: number;
   productsPriceDiscount: number;
@@ -119,7 +206,7 @@ export interface ReceiptItemObject {
   referenceId: string;
   type: string;
   title: string;
-  currency: string;
+  currency: Currency;
   priceBase: string;
   amount: string;
   priceInitial: number;
@@ -203,10 +290,17 @@ export interface ShipmentObject {
 }
 
 export interface PackageObject {
-  id: string; // Package Id.
-  orderItemIds: string[]; // List of order item Ids.
-  trackingCode: string; // The tracking code of the package.
-  trackingUrl: string; // The tracking url.
+  /** Package Id */
+  id: string;
+
+  /** List of order item Ids. */
+  orderItemIds: string[];
+
+  /** The tracking code of the package. */
+  trackingCode: string;
+
+  /** The tracking url. */
+  trackingUrl: string;
 }
 
 /**
@@ -214,25 +308,37 @@ export interface PackageObject {
  */
 export interface OrderCreateItemObject {
   /**
-   * Reference to your internal order item ID. Must be unique within your order.
+   * Reference to your internal order item ID.
+   * Must be unique within your order.
    */
   itemReferenceId: string;
-  /**
-   * Type of printing product in product UID format.
-   */
+
+  /** Type of printing product in product UID format. */
   productUid: string;
+
   /**
    * The page count for multipage products. This parameter is only needed for multipage products.
+   *
    * All pages in the product, including front and back cover, are included in the count.
-   * For example, for a Wire-o Notebook there are 112 inner pages (56 leaves), 2 front (outer and inside) and 2 back cover (outer and inside) pages, total 116 pages. The pageCount is 116.
-   * Read more: https://docs.printify.com/docs/page-count-parameter
+   *
+   * For example, for a Wire-o Notebook there are 112 inner pages (56 leaves),
+   * 2 front (outer and inside) and 2 back cover (outer and inside) pages, total 116 pages.
+   * The pageCount is 116.
+   *
+   * @see https://docs.printify.com/docs/page-count-parameter
    */
   pageCount?: number;
+
   /**
-   * Files that would be used to generate product file. Files are required for printable products only.
-   * Supported file formats are: PDF, PNG, TIFF, SVG and JPEG. For PDF files, please use one of the compatible PDF/X standards, for example in PDF/X-1a:2003 or PDF/X-4 standard.
+   * Files that would be used to generate product file.
+   * Files are required for printable products only.
+   * Supported file formats are: PDF, PNG, TIFF, SVG and JPEG.
+   *
+   * For PDF files, please use one of the compatible PDF/X standards,
+   * for example in PDF/X-1a:2003 or PDF/X-4 standard.
    */
   files?: File[];
+
   /**
    * The product quantity. Defines how many copies of product should be printed.
    * The minimum value is 1.
@@ -240,7 +346,7 @@ export interface OrderCreateItemObject {
   quantity: number;
 }
 
-export interface CreaeOrderMetadataObject {
+export interface CreateOrderMetadataObject {
   key: string;
   value: string;
 }
@@ -282,48 +388,66 @@ export interface ReturnAddressObject {
   phone?: string;
 }
 
+export type OrderType = 'order' | 'draft';
+
 /**
  * Represents the request for creating a new order.
  */
 export interface CreateOrderRequest {
   /**
-   * The type of the order. Can be "order" or "draft".
-   * Default value: "order".
+   * The type of the order.
+   *
+   * @default `order`
    */
-  orderType?: string;
-  /**
-   * Reference to your internal order ID.
-   */
+  orderType?: OrderType;
+
+  /** Reference to your internal order ID. */
   orderReferenceId: string;
-  /**
-   * Reference to your internal customer ID.
-   */
+
+  /** Reference to your internal customer ID. */
   customerReferenceId: string;
+
   /**
    * The ISO code of the currency that the order should be charged in.
-   * Supported currencies: EUR, USD, JPY, BGN, CZK, DKK, GBP, HUF, PLN, RON, SEK, CHF, ISK, NOK, HRK, RUB, TRY, AUD, BRL, CAD, CNY, HKD, IDR, ILS, INR, KRW, MXN, MYR, NZD, PHP, SGD, THB, ZAR, CLP, AED.
-   * Note: It is applicable only for customers using wallets or credit cards for payments.
+   *
+   * @note It is applicable only for customers using wallets or credit cards for payments.
+   * @see {@link Currency}
    */
-  currency: string;
+  currency: Currency;
+
   /**
    * A list of line item objects, each containing information about an item in the order.
+   *
+   * @see {@link OrderCreateItemObject}
    */
   items: OrderCreateItemObject[];
+
   /**
    * A list of key-value pair objects used for storing additional, structured information on an order.
    * Max number of entries: 20.
+   *
+   * @see {@link CreateOrderMetadataObject}
    */
-  metadata?: CreaeOrderMetadataObject[];
+  metadata?: CreateOrderMetadataObject[];
+
   /**
    * Shipping address information.
+   *
+   * @see {@link ShippingAddressObject}
    */
   shippingAddress: ShippingAddressObject;
+
   /**
-   * Preferred shipping method identifier. Can be "normal", "express" or shipmentMethodUid value returned in the Quote API call response. By default, the cheapest shipping method will be used.
+   * Preferred shipping method identifier.
+   * Can be "normal", "express" or shipmentMethodUid value returned in the Quote API call response.
+   * By default, the cheapest shipping method will be used.
    */
   shipmentMethodUid?: string;
+
   /**
    * Return address information.
+   *
+   * @see {@link ReturnAddressObject}
    */
   returnAddress?: ReturnAddressObject;
 }
@@ -363,21 +487,98 @@ export interface SearchOrdersResponse {
 }
 
 export interface QuoteOrderRecipientObject {
-  country: string; // The two-character ISO 3166-1 code that identifies the country or region.
-  firstName: string; // The first name of the recipient at this address. Maximum length is 25 characters.
-  lastName: string; // The last name of the recipient at this address. Maximum length is 25 characters.
-  companyName?: string; // The company name of the recipient at this address. Maximum length is 60 characters.
-  addressLine1: string; // The first line of the address. For example, number, street, and so on. Maximum length is 35 characters.
-  addressLine2?: string; // The second line of the address. For example, suite or apartment number. Maximum length is 35 characters.
-  city: string; // The city name. Maximum length is 30 characters.
-  postCode: string; // The postal code, which is the zip code or equivalent. Typically required for countries with a postal code or an equivalent. See postal code. Maximum length is 15 characters.
-  state?: string; // The code for a US state or the equivalent for other countries. Required for requests if the address is in one of these countries: Australia, Canada or United States. Maximum length is 35 characters. See list of state codes.
-  email: string; // The email address for the recipient.
-  phone?: string; // The phone number, in E.123 format. Maximum length is 25 characters.
-  isBusiness?: boolean; // Boolean value, declares the recipient being a business. Use if tax for recipient country is different for private and business customers (e.g. in Brazil) to change federalTaxId field type. Mandatory for Brazil if recipient is a company.
-  federalTaxId?: string; // The Federal Tax identification number of recipient. Use to provide CPF/CNPJ of a Brazilian recipient. Mandatory for Brazil. In order to supply CNPJ instead of CPF, set isBusiness field to true.
-  stateTaxId?: string; // The State Tax identification number of recipient. Use to provide IE of a Brazilian recipient. Mandatory for Brazil if recipient is a company. In order to supply this field, set isBusiness field to true.
-  registrationStateCode?: string; // The code number for a US state or the equivalent for other countries that defines state where recipient company is registered. Mandatory for Brazil if recipient is a company. In order to supply this field, set isBusiness field to true.
+  /** The two-character ISO 3166-1 code that identifies the country or region. */
+  country: string;
+
+  /**
+   * The first name of the recipient at this address.
+   *
+   * Maximum length is 25 characters.
+   */
+  firstName: string;
+
+  /**
+   * The last name of the recipient at this address.
+   *
+   * Maximum length is 25 characters.
+   */
+  lastName: string;
+
+  /**
+   * The company name of the recipient at this address.
+   *
+   * Maximum length is 60 characters.
+   */
+  companyName?: string;
+
+  /**
+   * The first line of the address.
+   * For example, number, street, and so on.
+   * Maximum length is 35 characters.
+   */
+  addressLine1: string;
+
+  /**
+   * The second line of the address.
+   * For example, suite or apartment number.
+   * Maximum length is 35 characters.
+   */
+  addressLine2?: string;
+
+  /** The city name. Maximum length is 30 characters. */
+  city: string;
+
+  /**
+   * The postal code, which is the zip code or equivalent.
+   * Typically required for countries with a postal code or an equivalent.
+   * Maximum length is 15 characters.
+   */
+  postCode: string;
+
+  /**
+   * The code for a US state or the equivalent for other countries.
+   *
+   * Required for requests if the address is in one of these countries:
+   * Australia, Canada or United States.
+   *
+   * Maximum length is 35 characters. See list of state codes. */
+  state?: string;
+
+  /** The email address for the recipient. */
+  email: string;
+
+  /** The phone number, in E.123 format. Maximum length is 25 characters. */
+  phone?: string;
+
+  /**
+   * Boolean value, declares the recipient being a business.
+   * Use if tax for recipient country is different for private and business customers (e.g. in Brazil)
+   * to change federalTaxId field type. Mandatory for Brazil if recipient is a company.
+   */
+  isBusiness?: boolean;
+
+  /**
+   * The Federal Tax identification number of recipient.
+   * Use to provide CPF/CNPJ of a Brazilian recipient. Mandatory for Brazil.
+   * In order to supply CNPJ instead of CPF, set isBusiness field to true.
+   */
+  federalTaxId?: string;
+
+  /**
+   * The State Tax identification number of recipient.
+   * Use to provide IE of a Brazilian recipient.
+   * Mandatory for Brazil if recipient is a company.
+   * In order to supply this field, set isBusiness field to true.
+   */
+  stateTaxId?: string;
+
+  /**
+   * The code number for a US state or the equivalent for other countries that defines state
+   * where recipient company is registered.
+   * Mandatory for Brazil if recipient is a company.
+   * In order to supply this field, set isBusiness field to true.
+   */
+  registrationStateCode?: string;
 }
 
 export interface QuoteOrderRequestProductObject {
@@ -393,7 +594,7 @@ export interface QuoteOrderRequest {
   customerReferenceId: string;
   recipient: QuoteOrderRecipientObject;
   products: QuoteOrderRequestProductObject[];
-  currency: string;
+  currency: Currency;
   allowMultipleQuotes?: boolean;
 }
 
@@ -404,14 +605,14 @@ export interface QuoteOrderResponseProductObject {
   files?: File[];
   quantity: number;
   price: number;
-  currency: string;
+  currency: Currency;
 }
 
 export interface QuoteOrderResponseShipmentMethodObject {
   name: string;
   shipmentMethodUid: string;
   price: number;
-  currency: string;
+  currency: Currency;
   minDeliveryDays: number;
   maxDeliveryDays: number;
   minDeliveryDate: string;
@@ -442,6 +643,15 @@ export interface PatchOrderItemObject {
 }
 
 export interface PatchOrderRequest {
-  orderType: 'order'; // The value should be order to convert draft order into a regular one.
-  items?: ItemObject[]; // List of order items which should be modified.
+  /**
+   * The value must be order to convert draft order into a regular one
+   */
+  orderType: 'order';
+
+  /**
+   * List of order items which should be modified.
+   *
+   * @see {@link ItemObject}
+   */
+  items?: ItemObject[];
 }
