@@ -240,7 +240,7 @@ export interface OrderCreateItemObject {
   quantity: number;
 }
 
-export interface CreaeOrderMetadataObject {
+export interface CreateOrderMetadataObject {
   key: string;
   value: string;
 }

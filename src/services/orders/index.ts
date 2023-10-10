@@ -51,7 +51,7 @@ export function getOrdersAPI(client?: Client): OrdersAPI {
 
 export {
   BillingEntityObject,
-  CreaeOrderMetadataObject,
+  CreateOrderMetadataObject,
   CreateOrderRequest,
   File,
   FileType,
