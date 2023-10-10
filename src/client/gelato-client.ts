@@ -19,7 +19,7 @@ import { Client, ClientOptions } from './core';
 import { deepCopy } from '../utils/deep-copy';
 import { ClientErrorCode, GelatoClientError } from '../utils/error';
 import { isNonNullObject } from '../utils/validator';
-import { HttpClient } from './http/index';
+import { HttpClient } from './http-client';
 
 export class GelatoClient implements Client {
   private name_!: string;
