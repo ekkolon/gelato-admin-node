@@ -1,6 +1,6 @@
 {
   "name": "gelato-admin",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "A lightweight Node.js client for the Gelato API",
   "author": "Nelson Dominguez <18242749+ekkolon@users.noreply.github.com>",
   "license": "Apache-2.0",
