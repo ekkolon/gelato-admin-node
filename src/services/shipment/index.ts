@@ -20,23 +20,23 @@ import { Client, getClient } from '../../client/index';
 import { ShipmentAPI } from './shipment-api';
 
 /**
- * Gets the {@link Auth} service for the default app or a
- * given app.
+ * Get a reference to the {@link ShipmentAPI} service for the default client or a
+ * given client.
  *
- * `getAuth()` can be called with no arguments to access the default app's
- * {@link Auth} service or as `getAuth(app)` to access the
- * {@link Auth} service associated with a specific app.
+ * `getShipmentAPI()` can be called with no arguments to access the default client's
+ * {@link ShipmentAPI} service or as `getShipmentAPI(client)` to access the
+ * {@link ShipmentAPI} service associated with a specific client.
  *
  * @example
  * ```javascript
- * // Get the Auth service for the default app
- * const defaultAuth = getAuth();
+ * // Get the ShipmentAPI service for the default client
+ * const defaultShipmentAPI = getShipmentAPI();
  * ```
  *
  * @example
  * ```javascript
- * // Get the Auth service for a given app
- * const otherAuth = getAuth(otherApp);
+ * // Get the ShipmentAPI service for a given client
+ * const otherShipmentAPI = getShipmentAPI(otherClient);
  * ```
  *
  */
