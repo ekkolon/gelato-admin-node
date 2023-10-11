@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-import { loadEnvConfig } from '../utils/env';
 import { ClientErrorCode, ClientErrorMessage, GelatoClientError } from '../utils/error';
 import { isNonEmptyString } from '../utils/validator';
 import { Client, ClientOptions } from './core';
@@ -102,4 +101,37 @@ export function getClient(clientName: string = DEFAULT_CLIENT_NAME): Client {
 
 export function getClients(): Client[] {
   return defaultClientStore.getClients();
+}
+
+/**
+ * Interface representing the configuration options for the Gelato client.
+ *
+ * @internal
+ */
+export interface GelatoEnvConfig {
+  apiKey?: string;
+}
+
+/** @internal */
+export const GELATO_API_KEY_VAR = 'GELATO_API_KEY';
+
+/**
+ * Loads the configuration options for the Gelato client from the environment.
+ * If no `apiKey` is found, an error is thrown.
+ * @param throwIfNoApiKey Whether to throw an error if no `apiKey` is found.
+ * @returns The configuration options for the Gelato client.
+ *
+ * @internal
+ */
+export function loadEnvConfig(throwIfNoApiKey = true): Partial<GelatoEnvConfig> {
+  const apiKey = process.env[GELATO_API_KEY_VAR];
+
+  if (!apiKey && throwIfNoApiKey) {
+    const errMessage =
+      'Failed to load environment configuration: No API key found. ' +
+      `Make sure to set the ${GELATO_API_KEY_VAR} environment variable.`;
+    throw new GelatoClientError(ClientErrorCode.NO_API_KEY, errMessage);
+  }
+
+  return { apiKey };
 }

@@ -23,8 +23,6 @@ import {
   post as makePostRequest,
 } from 'axios';
 
-import { GELATO_API_HEADER_KEY } from '../utils/env';
-
 /**
  * HTTP client for making (authenticated) requests to Gelato APIs.
  *
@@ -106,6 +104,12 @@ export type HttpRequestConfigInit = Omit<AxiosRequestConfig, 'headers' | 'data'>
 export interface HttpClientOptions {
   apiKey?: string;
 }
+
+/**
+ * Constant holding the header key for making authenticated requests
+ * to the Gelato API.
+ */
+const GELATO_API_HEADER_KEY = 'X-API-KEY';
 
 /**
  * Merge an *incoming* (axios) request config object with internal http config.

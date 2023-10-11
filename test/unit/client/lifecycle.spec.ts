@@ -16,8 +16,12 @@
  */
 
 import { GelatoClient } from '../../../src/client/gelato-client';
-import { ClientStore, DEFAULT_CLIENT_NAME } from '../../../src/client/lifecycle';
-import { GELATO_API_KEY_VAR } from '../../../src/utils/env';
+import {
+  ClientStore,
+  DEFAULT_CLIENT_NAME,
+  GELATO_API_KEY_VAR,
+  loadEnvConfig,
+} from '../../../src/client/lifecycle';
 import { ClientErrorCode, ClientErrorMessage, GelatoClientError } from '../../../src/utils/error';
 
 import * as mocks from '../../resources/mocks';
@@ -40,6 +44,22 @@ describe('ClientStore', () => {
     } else {
       delete process.env[GELATO_API_KEY_VAR];
     }
+  });
+
+  describe('utils/loadEnvConfig', () => {
+    beforeEach(() => {
+      delete process.env[GELATO_API_KEY_VAR];
+    });
+
+    describe('#loadEnvConfig()', () => {
+      it('should throw when no apiKey is provided and "throwIfNoApiKey" is set to true', () => {
+        expect(() => loadEnvConfig(true)).toThrow();
+      });
+
+      it('should not throw when no apiKey is provided and "throwIfNoApiKey" is set to false', () => {
+        expect(() => loadEnvConfig(false)).not.toThrow();
+      });
+    });
   });
 
   const emptyClientName = '';

@@ -36,7 +36,7 @@ import {
   ProductsAPI,
 } from '../../src/services/products';
 import { getShipmentAPI, ShipmentAPI } from '../../src/services/shipment';
-import { GELATO_API_KEY_VAR, GelatoEnvConfig, loadEnvConfig } from '../../src/utils/env';
+import { GELATO_API_KEY_VAR, GelatoEnvConfig, loadEnvConfig } from '../../src/client/lifecycle';
 import { GelatoClientError } from '../../src/utils/error';
 
 import * as ordersMock from '../resources/order.mocks';
