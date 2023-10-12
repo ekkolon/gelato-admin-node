@@ -15,13 +15,41 @@
  * limitations under the License.
  */
 
+import { combineURLs } from '../../utils/urls';
 import { BaseAPI } from '../api-service';
 import { GetCatalogResponse, GetCatalogsResponse } from './catalog';
 import { GetCoverDimensionsResponse } from './cover-dimensions';
-import * as endpoints from './endpoints';
 import { GetPricesResponse } from './prices';
 import { GetProductResponse, GetProductsFilter, GetProductsResponse } from './product';
 import { GetStockAvailabilityResponse } from './stock-availability';
+
+const PRODUCTS_ROOT_URL = 'https://product.gelatoapis.com/v3/';
+
+const CATALOGS_URL = combineURLs(PRODUCTS_ROOT_URL, 'catalogs');
+
+const STOCK_URL = combineURLs(PRODUCTS_ROOT_URL, 'stock');
+
+const STOCK_AVAILABILITY_URL = combineURLs(STOCK_URL, 'region-availability');
+
+const getCatalogURL = (catalogId: string) => {
+  return combineURLs(CATALOGS_URL, catalogId);
+};
+
+const getCatalogProductsURL = (catalogId: string) => {
+  return combineURLs(getCatalogURL(catalogId), 'products:search');
+};
+
+const PRODUCTS_URL = combineURLs(PRODUCTS_ROOT_URL, 'products');
+
+const getProductURL = (productId: string) => combineURLs(PRODUCTS_URL, productId);
+
+const getProductPricesURL = (productId: string) => {
+  return combineURLs(getProductURL(productId), 'prices');
+};
+
+const getProductCoverDimensionsURL = (productId: string) => {
+  return combineURLs(getProductURL(productId), 'cover-dimensions');
+};
 
 /**
  * @description
@@ -38,7 +66,7 @@ export class ProductsAPI extends BaseAPI {
    * @returns A promise resolving with a list of `Catalog` objects.
    */
   async getCatalogs(): Promise<GetCatalogsResponse> {
-    return this.httpClient.get<GetCatalogsResponse>(endpoints.CATALOGS);
+    return this.httpClient.get<GetCatalogsResponse>(CATALOGS_URL);
   }
 
   /**
@@ -49,7 +77,7 @@ export class ProductsAPI extends BaseAPI {
    * @returns A promise resolving with a `Catalog` object that contains product attributes.
    */
   async getCatalog(catalogId: string): Promise<GetCatalogResponse> {
-    return this.httpClient.get<GetCatalogResponse>(endpoints.getCatalog(catalogId));
+    return this.httpClient.get<GetCatalogResponse>(getCatalogURL(catalogId));
   }
 
   /**
@@ -64,7 +92,7 @@ export class ProductsAPI extends BaseAPI {
     filter: GetProductsFilter = {},
   ): Promise<GetProductsResponse> {
     return this.httpClient.post<GetProductsResponse, GetProductsFilter>(
-      endpoints.getCatalogProducts(catalogId),
+      getCatalogProductsURL(catalogId),
       filter,
     );
   }
@@ -75,7 +103,7 @@ export class ProductsAPI extends BaseAPI {
    * @returns A promise resolving with an object containing product details.
    */
   async getProduct(productId: string): Promise<GetProductResponse> {
-    return this.httpClient.get<GetProductResponse>(endpoints.getProduct(productId));
+    return this.httpClient.get<GetProductResponse>(getProductURL(productId));
   }
 
   /**
@@ -84,7 +112,7 @@ export class ProductsAPI extends BaseAPI {
    * @returns A promise resolving with a list of `Price` objects.
    */
   async getProductPrices(productId: string): Promise<GetPricesResponse> {
-    return this.httpClient.get<GetPricesResponse>(endpoints.getProductPrices(productId));
+    return this.httpClient.get<GetPricesResponse>(getProductPricesURL(productId));
   }
 
   /**
@@ -99,7 +127,7 @@ export class ProductsAPI extends BaseAPI {
     config: { params: { pageCount: number } },
   ): Promise<GetCoverDimensionsResponse> {
     return this.httpClient.get<GetCoverDimensionsResponse>(
-      endpoints.getProductCoverDimensions(productId),
+      getProductCoverDimensionsURL(productId),
       config,
     );
   }
@@ -111,7 +139,7 @@ export class ProductsAPI extends BaseAPI {
    */
   async getStockAvailability(productIds: string[]): Promise<GetStockAvailabilityResponse> {
     return this.httpClient.post<GetStockAvailabilityResponse, { products: string[] }>(
-      endpoints.STOCK_AVAILABILITY,
+      STOCK_AVAILABILITY_URL,
       { products: productIds },
     );
   }

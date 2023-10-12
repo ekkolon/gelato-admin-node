@@ -15,8 +15,8 @@
  * limitations under the License.
  */
 
+import { combineURLs } from '../../utils/urls';
 import { BaseAPI } from '../api-service';
-import * as endpoints from './endpoints';
 import {
   CreateOrderRequest,
   GetOrderResponse,
@@ -26,6 +26,18 @@ import {
   SearchOrdersRequest,
   SearchOrdersResponse,
 } from './order';
+
+const ORDERS_ROOT_URL = 'https://order.gelatoapis.com/v4/';
+
+const GET_ORDERS_URL = combineURLs(ORDERS_ROOT_URL, 'orders');
+
+const SEARCH_ORDERS_URL = combineURLs(ORDERS_ROOT_URL, 'orders:search');
+
+const QUOTE_ORDER_URL = combineURLs(`${GET_ORDERS_URL}:quote`, '');
+
+const getOrderURL = (orderId: string) => combineURLs(GET_ORDERS_URL, orderId);
+
+const cancelOrderURL = (orderId: string) => combineURLs(GET_ORDERS_URL, `${orderId}:cancel`);
 
 /**
  * @description
@@ -43,7 +55,7 @@ export class OrdersAPI extends BaseAPI {
    * @returns A promise resolving with a list of orders found.
    */
   getOrders(filter: SearchOrdersRequest = {}): Promise<SearchOrdersResponse> {
-    return this.httpClient.get<SearchOrdersResponse>(endpoints.SEARCH_ORDERS, { params: filter });
+    return this.httpClient.get<SearchOrdersResponse>(SEARCH_ORDERS_URL, { params: filter });
   }
 
   /**
@@ -52,7 +64,7 @@ export class OrdersAPI extends BaseAPI {
    * @returns A promise resolving with details about the order by provided `orderId`.
    */
   getOrder(orderId: string): Promise<GetOrderResponse> {
-    return this.httpClient.get<GetOrderResponse>(endpoints.getOrder(orderId));
+    return this.httpClient.get<GetOrderResponse>(getOrderURL(orderId));
   }
 
   /**
@@ -61,7 +73,7 @@ export class OrdersAPI extends BaseAPI {
    * @returns A promise resolving with the newly created `Order` object.
    */
   createOrder(data: CreateOrderRequest): Promise<GetOrderResponse> {
-    return this.httpClient.post<GetOrderResponse, CreateOrderRequest>(endpoints.GET_ORDERS, data);
+    return this.httpClient.post<GetOrderResponse, CreateOrderRequest>(GET_ORDERS_URL, data);
   }
 
   /**
@@ -72,10 +84,7 @@ export class OrdersAPI extends BaseAPI {
    * @returns A promise resolving with details about the order by provided `orderId`
    */
   patchDraftOrder(orderId: string, data: PatchOrderRequest): Promise<GetOrderResponse> {
-    return this.httpClient.patch<GetOrderResponse, PatchOrderRequest>(
-      endpoints.getOrder(orderId),
-      data,
-    );
+    return this.httpClient.patch<GetOrderResponse, PatchOrderRequest>(getOrderURL(orderId), data);
   }
 
   /**
@@ -87,7 +96,7 @@ export class OrdersAPI extends BaseAPI {
    *  Otherwise, an error is thrown.
    */
   cancelOrder(orderId: string): Promise<true> {
-    return this.httpClient.post<true, undefined>(endpoints.cancelOrder(orderId), undefined);
+    return this.httpClient.post<true, undefined>(cancelOrderURL(orderId), undefined);
   }
 
   /**
@@ -96,7 +105,7 @@ export class OrdersAPI extends BaseAPI {
    * @param orderId The `id` of the order to delete.
    */
   deleteDraftOrder(orderId: string): Promise<unknown> {
-    return this.httpClient.delete<unknown>(endpoints.getOrder(orderId));
+    return this.httpClient.delete<unknown>(getOrderURL(orderId));
   }
 
   /**
@@ -106,6 +115,6 @@ export class OrdersAPI extends BaseAPI {
    *  and the list of orders.
    */
   quoteOrder(data: QuoteOrderRequest): Promise<QuoteOrderResponse> {
-    return this.httpClient.post<QuoteOrderResponse, QuoteOrderRequest>(endpoints.QUOTE_ORDER, data);
+    return this.httpClient.post<QuoteOrderResponse, QuoteOrderRequest>(QUOTE_ORDER_URL, data);
   }
 }
