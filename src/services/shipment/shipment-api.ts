@@ -15,9 +15,13 @@
  * limitations under the License.
  */
 
+import { combineURLs } from '../../utils/urls';
 import { BaseAPI } from '../api-service';
-import * as endpoints from './endpoints';
 import { GetShipmentMethodsQueryParams, GetShipmentMethodsResponse } from './shipment';
+
+const SHIPMENT_ROOT_URL = 'https://shipment.gelatoapis.com/v1';
+
+const SHIPMENT_METHODS_URL = combineURLs(SHIPMENT_ROOT_URL, 'shipment-methods');
 
 /**
  * @description
@@ -38,6 +42,6 @@ export class ShipmentAPI extends BaseAPI {
   getShipmentMethods(
     params: GetShipmentMethodsQueryParams = {},
   ): Promise<GetShipmentMethodsResponse> {
-    return this.httpClient.get<GetShipmentMethodsResponse>(endpoints.SHIPMENT_METHODS, { params });
+    return this.httpClient.get<GetShipmentMethodsResponse>(SHIPMENT_METHODS_URL, { params });
   }
 }
