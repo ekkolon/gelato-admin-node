@@ -55,7 +55,10 @@ export class OrdersAPI extends BaseAPI {
    * @returns A promise resolving with a list of orders found.
    */
   getOrders(filter: SearchOrdersRequest = {}): Promise<SearchOrdersResponse> {
-    return this.httpClient.get<SearchOrdersResponse>(SEARCH_ORDERS_URL, { params: filter });
+    return this.httpClient.post<SearchOrdersResponse, SearchOrdersRequest>(
+      SEARCH_ORDERS_URL,
+      filter,
+    );
   }
 
   /**
