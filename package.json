@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "homepage": "https://github.com/ekkolon/gelato-admin-node#readme",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "scripts": {
     "build": "gulp build",
@@ -81,7 +81,7 @@
     "@types/gulp-filter": "^3.0.36",
     "@types/jest": "28.1.1",
     "@types/lodash": "^4.14.197",
-    "@types/node": "16.11.7",
+    "@types/node": "18.18.5",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
     "del": "^7.0.0",
