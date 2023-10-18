@@ -8,9 +8,10 @@
   "engines": {
     "node": ">=18"
   },
+  "packageManager": "pnpm@8.9.0",
   "scripts": {
     "build": "gulp build",
-    "prepare": "yarn run build && yarn run generate-esm",
+    "prepare": "pnpm build && pnpm run generate-esm",
     "lint": "eslint \"**/*.ts\"",
     "lint:fix": "eslint --fix \"**/*.ts\"",
     "test": "jest --config jest.config.ts --testPathPattern test/unit",
