@@ -16,7 +16,7 @@
  */
 
 import { combineURLs } from '../../utils/urls';
-import { BaseAPI } from '../api-service';
+import { ApiService } from '../api-service';
 import { GetCatalogResponse, GetCatalogsResponse } from './catalog';
 import { GetCoverDimensionsResponse } from './cover-dimensions';
 import { GetPricesResponse } from './prices';
@@ -60,7 +60,7 @@ const getProductCoverDimensionsURL = (productId: string) => {
  *
  * @publicApi
  */
-export class ProductsAPI extends BaseAPI {
+export class ProductsAPI extends ApiService {
   /**
    * Retrieve a list of available catalogs.
    * @returns A promise resolving with a list of `Catalog` objects.

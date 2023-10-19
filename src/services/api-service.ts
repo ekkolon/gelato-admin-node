@@ -18,8 +18,7 @@
 import { Client, HttpClient } from '../client';
 import { GelatoClient } from '../client/gelato-client';
 
-/** @internal */
-export abstract class BaseAPI {
+export class ApiService {
   private readonly client_: GelatoClient;
 
   constructor(client: GelatoClient) {

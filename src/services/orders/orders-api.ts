@@ -16,7 +16,7 @@
  */
 
 import { combineURLs } from '../../utils/urls';
-import { BaseAPI } from '../api-service';
+import { ApiService } from '../api-service';
 import {
   CreateOrderRequest,
   GetOrderResponse,
@@ -48,7 +48,7 @@ const cancelOrderURL = (orderId: string) => combineURLs(GET_ORDERS_URL, `${order
  *
  * @publicApi
  */
-export class OrdersAPI extends BaseAPI {
+export class OrdersAPI extends ApiService {
   /**
    * Retrieve a list of orders.
    * @param filter An object containing filter properties to customize the query.

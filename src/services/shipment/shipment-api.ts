@@ -16,7 +16,7 @@
  */
 
 import { combineURLs } from '../../utils/urls';
-import { BaseAPI } from '../api-service';
+import { ApiService } from '../api-service';
 import { GetShipmentMethodsQueryParams, GetShipmentMethodsResponse } from './shipment';
 
 const SHIPMENT_ROOT_URL = 'https://shipment.gelatoapis.com/v1';
@@ -32,7 +32,7 @@ const SHIPMENT_METHODS_URL = combineURLs(SHIPMENT_ROOT_URL, 'shipment-methods');
  *
  * @publicApi
  */
-export class ShipmentAPI extends BaseAPI {
+export class ShipmentAPI extends ApiService {
   /**
    * Get information about each shipment method that Gelato provides.
    * The shipping methods can be filtered on shipment destination country.
