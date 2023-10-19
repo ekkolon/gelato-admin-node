@@ -95,7 +95,6 @@
     "gulp-filter": "^7.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "jest": "28.1.1",
-    "lodash": "^4.17.21",
     "prettier": "^2.6.2",
     "ts-jest": "28.0.5",
     "ts-node": "10.9.1",

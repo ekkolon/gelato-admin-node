@@ -61,9 +61,6 @@ devDependencies:
   jest:
     specifier: 28.1.1
     version: 28.1.1(@types/node@18.18.5)(ts-node@10.9.1)
-  lodash:
-    specifier: ^4.17.21
-    version: 4.17.21
   prettier:
     specifier: ^2.6.2
     version: 2.8.8
@@ -3893,10 +3890,6 @@ packages:
 
   /lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
-    dev: true
-
-  /lodash@4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: true
 
   /lru-cache@5.1.1:
