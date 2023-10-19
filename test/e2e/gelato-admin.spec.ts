@@ -20,7 +20,7 @@ import dotenv from 'dotenv';
 import { initializeClient } from '../../src/client';
 import { GelatoClient } from '../../src/client/gelato-client';
 import { DEFAULT_CLIENT_NAME } from '../../src/client/lifecycle';
-import { BaseAPI } from '../../src/services/api-service';
+import { ApiService } from '../../src/services/api-service';
 import {
   GetOrderResponse,
   getOrdersAPI,
@@ -324,8 +324,8 @@ describe('Gelato Admin', () => {
 
 function runServiceInitTest(
   name: string,
-  serviceInstance: BaseAPI,
-  expectedType: typeof BaseAPI,
+  serviceInstance: ApiService,
+  expectedType: typeof ApiService,
   env: GelatoEnvConfig,
 ) {
   it(`should return an instance of ${name}`, async () => {
