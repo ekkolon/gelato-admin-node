@@ -69,7 +69,11 @@ export class GelatoError extends Error implements GelatoErrorInterface {
  * @constructor
  */
 export class PrefixedGelatoError extends GelatoError {
-  constructor(private codePrefix: string, code: string, message: string) {
+  constructor(
+    private codePrefix: string,
+    code: string,
+    message: string,
+  ) {
     super({
       code: `${codePrefix}/${code}`,
       message,
