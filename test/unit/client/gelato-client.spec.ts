@@ -15,10 +15,9 @@
  * limitations under the License.
  */
 
-import _ from 'lodash';
-
 import { GelatoClient } from '../../../src/client/gelato-client';
 import { GELATO_API_KEY_VAR } from '../../../src/client/lifecycle';
+import { deepCopy } from '../../../src/utils/deep-copy';
 import * as mocks from '../../resources/mocks';
 
 describe('GelatoClient', () => {
@@ -65,7 +64,7 @@ describe('GelatoClient', () => {
     });
 
     it('should not return an object which can mutate the underlying options', () => {
-      const original = _.clone(mockClient.options);
+      const original = deepCopy(mockClient.options);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (mockClient.options as any).foo = 'changed';
       expect(mockClient.options).toStrictEqual(original);
