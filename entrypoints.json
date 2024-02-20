@@ -10,5 +10,9 @@
   "gelato-admin/shipment": {
     "typings": "./lib/services/shipment/index.d.ts",
     "dist": "./lib/services/shipment/index.js"
+  },
+  "gelato-admin/ecommerce": {
+    "typings": "./lib/services/ecommerce/index.d.ts",
+    "dist": "./lib/services/ecommerce/index.js"
   }
 }
