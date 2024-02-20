@@ -109,11 +109,12 @@ const myNamedClient = getClient('my-named-client');
 
 Here is an overview of Gelato API services available in this library.
 
-| Name         | Module                  | Service            |
-| ------------ | ----------------------- | ------------------ |
-| **Orders**   | `gelato-admin/orders`   | `getOrdersAPI()`   |
-| **Products** | `gelato-admin/products` | `getProductsAPI()` |
-| **Shipment** | `gelato-admin/shipment` | `getShipmentAPI()` |
+| Name          | Module                   | Service             |
+| ------------- | ------------------------ | ------------------- |
+| **Orders**    | `gelato-admin/orders`    | `getOrdersAPI()`    |
+| **Products**  | `gelato-admin/products`  | `getProductsAPI()`  |
+| **Shipment**  | `gelato-admin/shipment`  | `getShipmentAPI()`  |
+| **Ecommerce** | `gelato-admin/ecommerce` | `getEcommerceAPI()` |
 
 ### Default client
 
