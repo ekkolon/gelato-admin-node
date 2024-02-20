@@ -53,6 +53,9 @@
       ],
       "shipment": [
         "lib/services/shipment"
+      ],
+      "ecommerce": [
+        "lib/services/ecommerce"
       ]
     }
   },
@@ -72,6 +75,11 @@
       "types": "./lib/services/shipment/index.d.ts",
       "require": "./lib/services/shipment/index.js",
       "import": "./lib/esm/shipment/index.js"
+    },
+    "./ecommerce": {
+      "types": "./lib/services/ecommerce/index.d.ts",
+      "require": "./lib/services/ecommerce/index.js",
+      "import": "./lib/esm/ecommerce/index.js"
     }
   },
   "dependencies": {
