@@ -10,13 +10,13 @@
   },
   "packageManager": "pnpm@8.9.0",
   "scripts": {
-    "build": "gulp build",
+    "build": "pnpm exec gulp build",
     "prepare": "pnpm build && pnpm run generate-esm",
     "lint": "eslint \"**/*.ts\"",
     "lint:fix": "eslint --fix \"**/*.ts\"",
     "test": "jest --config jest.config.ts --testPathPattern test/unit",
     "test:e2e": "jest --config jest.config.ts --testPathPattern test/e2e",
-    "generate-esm": "node scripts/generate-esm.js"
+    "generate-esm": "pnpm exec tsx scripts/generate-esm.js"
   },
   "keywords": [
     "gelato",
@@ -107,6 +107,7 @@
     "prettier": "^3.6.2",
     "ts-jest": "29.4.5",
     "ts-node": "10.9.2",
+    "tsx": "^4.20.6",
     "typescript": "^5.2.2",
     "typescript-eslint": "^8.46.4"
   },

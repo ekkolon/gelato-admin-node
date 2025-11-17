@@ -21,10 +21,4 @@
     "baseUrl": "."
   },
   "files": ["src/index.ts"],
-  // these options are overrides used only by ts-node
-  "ts-node": {
-    "compilerOptions": {
-      "module": "NodeNext"
-    }
-  }
 }
