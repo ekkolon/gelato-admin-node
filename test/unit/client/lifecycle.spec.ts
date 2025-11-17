@@ -98,7 +98,7 @@ describe('ClientStore', () => {
         ClientErrorMessage.DUBPLICATE_CLIENT_NAME.replace('{{clientName}}', mocks.clientName),
       );
 
-      expect(initializeClientCall).toThrowError(invalidClientNameError);
+      expect(initializeClientCall).toThrow(invalidClientNameError);
     });
 
     it(`should throw when neither 'option.apiKey' & ${GELATO_API_KEY_VAR} is available`, () => {
@@ -108,7 +108,7 @@ describe('ClientStore', () => {
           'mock-client-no-api-key-provided',
         );
 
-      expect(initializeClientCall).toThrowError(GelatoClientError);
+      expect(initializeClientCall).toThrow(GelatoClientError);
     });
 
     it('should throw when an empty apiKey is provided', () => {
@@ -132,21 +132,21 @@ describe('ClientStore', () => {
   describe('#getClient()', () => {
     it('should throw when provided clientName is not a non-empty string', () => {
       const expectedError = makeInvalidClientError(emptyClientName);
-      expect(() => mockClientStore.getClient(emptyClientName)).toThrowError(expectedError);
+      expect(() => mockClientStore.getClient(emptyClientName)).toThrow(expectedError);
     });
 
     it('should throw when a client by clientName does not exist', () => {
       const nonExistingClientName = 'non-existing-client-name';
       const expectedErrorMessage = `Gelato client named "${nonExistingClientName}" does not exist. Make sure you call initializeClient() before using any of the Gelato API services.`;
       const expectedError = makeNoClientError(expectedErrorMessage);
-      expect(() => mockClientStore.getClient(nonExistingClientName)).toThrowError(expectedError);
+      expect(() => mockClientStore.getClient(nonExistingClientName)).toThrow(expectedError);
     });
 
     it('should throw when the default clientName does not exist', () => {
       const expectedErrorMessage =
         'The default Gelato client does not exist. Make sure you call initializeClient() before using any of the Gelato API services.';
       const expectedError = makeNoClientError(expectedErrorMessage);
-      expect(() => new ClientStore().getClient(DEFAULT_CLIENT_NAME)).toThrowError(expectedError);
+      expect(() => new ClientStore().getClient(DEFAULT_CLIENT_NAME)).toThrow(expectedError);
     });
 
     it('should return a client instance by given clientName', () => {
