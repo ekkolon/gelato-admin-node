@@ -54,7 +54,7 @@ describe('Gelato Admin', () => {
     });
 
     it('should throw when attempting to initialize a client with an invalid client name', async () => {
-      expect(() => initializeClient(undefined, '')).toThrowError(GelatoClientError);
+      expect(() => initializeClient(undefined, '')).toThrow(GelatoClientError);
     });
 
     it('should throw when attempting to initialize a client with an invalid api key', async () => {
@@ -353,7 +353,7 @@ function initializeTestEnvironmentVariables() {
 
   try {
     return loadEnvConfig();
-  } catch (error) {
+  } catch {
     throw new Error(
       `Error loading environment variables.
     To run the end-to-end tests, you need to create a .env file in the root directory of the project.

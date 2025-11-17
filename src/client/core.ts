@@ -17,10 +17,9 @@
 
 import { HttpClientOptions } from './http-client';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface ClientOptions extends HttpClientOptions {}
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Client {
   name: string;
   options: ClientOptions;
