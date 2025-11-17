@@ -76,7 +76,7 @@ export class ClientStore {
       throw new GelatoClientError(ClientErrorCode.NO_CLIENT, errorMessage);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+     
     return this.clientStore.get(clientName)!;
   }
 

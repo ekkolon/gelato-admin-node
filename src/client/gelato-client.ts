@@ -66,7 +66,7 @@ export class GelatoClient implements Client {
     return this.ensureService_(name, () => init(this));
   }
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
+   
   private ensureService_<T>(serviceName: string, initializer: () => T): T {
     if (!(serviceName in this.services_)) {
       this.services_[serviceName] = initializer();
