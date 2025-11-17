@@ -14,7 +14,7 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "lib": ["es2021"],
+    "lib": ["es2021", "dom"],
     "outDir": "lib",
     "stripInternal": true,
     "rootDir": ".",
