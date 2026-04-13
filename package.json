@@ -14,8 +14,8 @@
     "prepare": "pnpm build && pnpm run generate-esm",
     "lint": "eslint \"**/*.ts\"",
     "lint:fix": "eslint --fix \"**/*.ts\"",
-    "test": "jest --config jest.config.ts --testPathPattern test/unit",
-    "test:e2e": "jest --config jest.config.ts --testPathPattern test/e2e",
+    "test": "jest --config jest.config.ts --testPathPatterns test/unit",
+    "test:e2e": "jest --config jest.config.ts --testPathPatterns test/e2e",
     "generate-esm": "pnpm exec tsx scripts/generate-esm.js"
   },
   "keywords": [
@@ -103,9 +103,9 @@
     "gulp": "^5.0.1",
     "gulp-filter": "^9.0.1",
     "gulp-typescript": "^6.0.0-alpha.1",
-    "jest": "29.7.0",
+    "jest": "30.3.0",
     "prettier": "^3.6.2",
-    "ts-jest": "29.4.5",
+    "ts-jest": "29.4.9",
     "ts-node": "10.9.2",
     "tsx": "^4.20.6",
     "typescript": "^6.0.2",
