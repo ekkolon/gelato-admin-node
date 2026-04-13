@@ -14,11 +14,10 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "lib": ["es2021", "dom"],
+    "lib": ["es2022", "dom"],
     "outDir": "lib",
     "stripInternal": true,
     "rootDir": ".",
-    "baseUrl": "."
   },
   "files": ["src/index.ts"],
 }
