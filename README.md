@@ -1,10 +1,11 @@
 # Gelato Node.js SDK
 
-A lightweight Node.js SDK to seamlessly integrate [Gelato](https://dashboard.gelato.com/docs/)'s powerful print-on-demand services into your Node applications.
+A lightweight, zero-dependency Node.js SDK for integrating [Gelato](https://dashboard.gelato.com/docs/)'s print-on-demand services into your application.
+
+This library is tree-shakable, so you only import and bundle the API services you actually use. It supports the usage of multiple Gelato accounts within the same process through [named clients](#using-named-clients).
 
 ## Table of Contents
 
-- [Features](#features)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Using API services](#using-api-services)
@@ -13,21 +14,14 @@ A lightweight Node.js SDK to seamlessly integrate [Gelato](https://dashboard.gel
 - [Authors](#authors)
 - [Disclaimer](#disclaimer)
 
-## Features
-
-- :page_facing_up: Simple and intuitive API
-- :sparkles: Query and mutate data from different Gelato accounts
-- :deciduous_tree: Tree-shakable - only use and compile services you need
-- :shield: Battle-tested
-
 ## Getting Started
 
 ### Prerequisites
 
-Before you can use this library, you must complete the following steps:
+Before using this library, complete the following steps:
 
-1. [Create a Gelato Account](https://gelato.com)
-2. [Generate an API Key](https://dashboard.gelato.com/keys/manage)
+1. [Create a Gelato account](https://gelato.com)
+2. [Generate an API key](https://dashboard.gelato.com/keys/manage)
 
 ### Installation
 
@@ -35,13 +29,16 @@ Before you can use this library, you must complete the following steps:
 # npm
 npm install gelato-admin
 
+# pnpm
+pnpm add gelato-admin
+
 # yarn
 yarn add gelato-admin
 ```
 
 ## Usage
 
-Every API service is tied to a `GelatoClient` instance, whose sole purpose is to handle the request/response life-cycle when querying and mutating your Gelato data.
+Every API service is tied to a `GelatoClient` instance, which handles the request/response lifecycle when communicating with the Gelato API.
 
 There are two ways to initialize a `GelatoClient`:
 
@@ -51,23 +48,22 @@ See [.env.example](./.env.example).
 
 ```bash
 # .env
-
 GELATO_API_KEY=my-api-key
 ```
 
 ```ts
 import { initializeClient } from 'gelato-admin';
 
-// Auto-detect API key from `.env` file
+// Reads the API key from the GELATO_API_KEY environment variable
 const client = initializeClient();
 
-// The above snippet is a short-hand equivalent for:
+// Equivalent to:
 const client = initializeClient({ apiKey: process.env.GELATO_API_KEY });
 ```
 
-### 2. Setting API key explicitly
+### 2. Setting the API key explicitly
 
-> Useful for on-demand client initialization. Required for _named_ clients.
+> Useful for on-demand initialization and required when using named clients.
 
 ```ts
 import { initializeClient } from 'gelato-admin';
@@ -77,19 +73,17 @@ const client = initializeClient({ apiKey: 'my-api-key' });
 
 ### Using named clients
 
-> Note: The usage of named clients _is not_ a native Gelato API feature. It is a design decision based on the idea that you may have different Gelato accounts you want to use within the same application context.
+> Note: named clients are not a Gelato API feature. They are a design choice for applications that need to operate against multiple Gelato accounts within the same process.
 
-You may initialize as many client instances as you like, provided you initialize them with a unique name. If you only have a single Gelato account, however, there is no need to use named clients at all.
-
-To initialize a _named_ client, pass an unique name as the second argument.
+You can initialize as many client instances as needed, as long as each has a unique name. If you only work with a single Gelato account, named clients are not necessary.
 
 ```ts
 import { initializeClient } from 'gelato-admin';
 
-// Auto-detect API key from `.env` file, but use a specific name for the client instance.
+// Reads from the environment variable, but registers under a specific name
 const myDefaultNamedClient = initializeClient({}, 'my-named-client');
 
-// Use another Gelato account API key
+// A second client pointing at a different Gelato account
 const myOtherClient = initializeClient({ apiKey: 'other-account-api-key' }, 'other-account-client');
 ```
 
@@ -98,16 +92,16 @@ const myOtherClient = initializeClient({ apiKey: 'other-account-api-key' }, 'oth
 ```ts
 import { getClient } from 'gelato-admin';
 
-// Get the default client
+// Retrieve the default client
 const defaultClient = getClient();
 
-// Get a named client
+// Retrieve a named client
 const myNamedClient = getClient('my-named-client');
 ```
 
 ## Using API services
 
-Here is an overview of Gelato API services available in this library.
+The following API services are available:
 
 | Name          | Module                   | Service             |
 | ------------- | ------------------------ | ------------------- |
@@ -121,28 +115,23 @@ Here is an overview of Gelato API services available in this library.
 ```ts
 import { getProductsAPI } from 'gelato-admin/products';
 
-// Get the products API service from the default client.
 const productsAPI = getProductsAPI();
 
-// Get a list of all catalogs
 const catalogs = await productsAPI.getCatalogs();
 ```
 
 ### Named client
 
-To target a _named_ client, pass the client instance as the first argument to the desired API service function:
+To use a named client, pass the client instance as the first argument to the service function:
 
 ```ts
 import { initializeClient } from 'gelato-admin';
 import { getOrdersAPI } from 'gelato-admin/orders';
 
-// Initialize a named client with the API key from the environment variable
 const mySpecialClient = initializeClient({ apiKey: 'my-other-api-key' }, 'my-special-client');
 
-// Get the products API service using the named client.
 const ordersAPI = getOrdersAPI(mySpecialClient);
 
-// Get a list of all orders
 const orders = await ordersAPI.getOrders();
 ```
 
@@ -151,20 +140,20 @@ const orders = await ordersAPI.getOrders();
 ### Unit tests
 
 ```bash
-yarn run test
+pnpm test
 ```
 
 ### E2E tests
 
 ```bash
-yarn run test:e2e
+pnpm test:e2e
 ```
 
-E2E tests only create draft orders. In case E2E tests fail, make sure to check your Gelato dashboard for whether any orders other than `draft orders` were created. If so, you must delete them manually.
+E2E tests only create draft orders. If a test run fails partway through, check your Gelato dashboard to confirm no non-draft orders were created. If any non-draft orderes were created, you must delete them manually.
 
 ## License
 
-This project is licensed under the Apache License (2.0) - see the [LICENSE](LICENSE) file for more details.
+Licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
 
 ## Authors
 
@@ -172,6 +161,6 @@ This project is licensed under the Apache License (2.0) - see the [LICENSE](LICE
 
 ## Disclaimer
 
-Please note that this is **_not_ an official Gelato product**. I am in no way affiliated with Gelato. However, I started this library to make it easier for developers to work with Gelato's powerful print-on-demand platform.
+This is not an official Gelato product and is not affiliated with Gelato in any way. It was built to make it easier for developers to work with the Gelato API.
 
-> You bear complete responsibility for your utilization of this library. See [LICENSE](/LICENSE) file for more information.
+> You bear full responsibility for your use of this library. See the [LICENSE](/LICENSE) file for more information.
